@@ -10,7 +10,7 @@ class AdminSeeder extends Seeder {
     public function run() {
         Admin::create([
             'name' => 'Mohammad Raka Saputra',
-            'email' => 'admin@example.com',
+            'email' => 'admin@dapurmalika.com',
             'password' => Hash::make('password'),
             'address' => 'Sidoarjo',
             'birth_place' => 'Sidoarjo',
