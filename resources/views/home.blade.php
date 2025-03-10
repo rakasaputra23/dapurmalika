@@ -17,7 +17,6 @@
 </head>
 <body class="font-sans bg-gray-100">
 
-<!-- Tambahkan FontAwesome untuk ikon -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 
 <!-- Navbar -->
@@ -29,9 +28,7 @@
         <a href="#" class="hover:underline active:scale-95 transition">Kontak</a>
         <a href="#about" class="hover:underline active:scale-95 transition">Tentang</a>
     </div>
-
     <div class="hidden md:flex items-center space-x-4">
-        <!-- Tombol Search -->
         <button onclick="toggleSearch()" class="text-white text-xl hover:scale-110 transition">
             <i class="fa-solid fa-search"></i>
         </button>
@@ -41,16 +38,20 @@
                 <i class="fa-solid fa-user text-gray-700 text-lg"></i>
                 <span class="text-black font-semibold">{{ $admin->name ?? 'Admin' }}</span>
             </a>
-
             <form action="{{ route('admin.logout') }}" method="POST" class="inline">
                 @csrf
                 <button type="submit" class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
             </form>
-        @else
-            <a href="{{ route('admin.login') }}" class="bg-white text-red-500 px-4 py-2 rounded-lg hover:bg-gray-200 transition">Login Admin</a>
         @endif
     </div>
 </nav>
+
+<!-- Redirect untuk halaman reset password admin -->
+@if(request()->is('admin/password/reset'))
+    <script>
+        window.location.href = "{{ route('admin.login') }}";
+    </script>
+@endif
 
 <!-- Search Bar -->
 <div id="search-bar" class="hidden fixed top-16 left-0 w-full bg-white shadow-md p-4 flex justify-center">
