@@ -19,7 +19,19 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #ff6f00, #ff9800, #ffcc80);
+            background: url('/images/background.jpg') no-repeat center center/cover;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
         }
 
         .login-container {
@@ -30,6 +42,8 @@
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             animation: fadeIn 0.8s ease-in-out;
+            position: relative;
+            z-index: 1;
         }
 
         .login-image {
