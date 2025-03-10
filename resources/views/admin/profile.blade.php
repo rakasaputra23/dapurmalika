@@ -1,8 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-3xl bg-white shadow-xl rounded-2xl p-10">
+<div class="relative flex justify-center items-center w-screen h-screen">
+    <!-- Background dengan efek blur -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+        style="background-image: url('/images/background.jpg'); 
+               filter: blur(15px); 
+               transform: scale(1.1);">
+    </div>
+
+    <!-- Overlay semi-transparan agar konten lebih terbaca -->
+    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+
+    <div class="relative w-full max-w-3xl bg-white bg-opacity-80 shadow-xl rounded-2xl p-10 backdrop-blur-lg animate-fadeIn">
         
         <!-- Header Admin -->
         <div class="flex flex-col md:flex-row items-center md:items-start">
