@@ -33,7 +33,7 @@ public function showResetForm($token)
 
     // Simpan token ke database
     $token = \Str::random(64);
-    DB::table('password_resets')->updateOrInsert(
+    DB::table('password_resets_tokens')->updateOrInsert(
         ['email' => $request->email],
         ['token' => $token, 'created_at' => now()]
     );
@@ -56,7 +56,7 @@ public function showResetForm($token)
         ]);
 
         // Cek apakah token valid
-        $resetRequest = DB::table('password_resets')->where([
+        $resetRequest = DB::table('password_resets_tokens')->where([
             'email' => $request->email,
             'token' => $request->token,
         ])->first();
@@ -71,7 +71,7 @@ public function showResetForm($token)
         ]);
 
         // Hapus token setelah password diubah
-        DB::table('password_resets')->where(['email' => $request->email])->delete();
+        DB::table('password_resets_tokens')->where(['email' => $request->email])->delete();
 
         return redirect()->route('admin.login')->with('status', 'Password berhasil diubah! Silakan login dengan password baru.');
     }
