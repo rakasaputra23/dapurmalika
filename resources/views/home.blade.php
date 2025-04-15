@@ -124,9 +124,6 @@
         </div>
 
         <div class="hidden md:flex items-center space-x-4">
-            <button onclick="toggleSearch()" class="text-gray-700 hover:text-primary text-xl transition">
-                <i class="fa-solid fa-search"></i>
-            </button>
             <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-full transition">
                 Pesan Sekarang
             </a>

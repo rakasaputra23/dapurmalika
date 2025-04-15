@@ -5,7 +5,7 @@
 
 @section('content')
     <h1>Menu</h1>
-
+    
     <div class="menus">
         @foreach ($menus as $menu)
             <div class="menu-item">
