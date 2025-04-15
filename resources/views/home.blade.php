@@ -119,8 +119,8 @@
             <a href="#" class="hover:text-primary transition font-medium">Beranda</a>
             <a href="{{ route('menu') }}" class="hover:text-primary transition font-medium">Menu Catering</a>
             <a href="{{ route('galeri') }}" class="hover:text-primary transition font-medium">Galeri</a>
-            <a href="#" class="hover:text-primary transition font-medium">Tentang Kami</a>
-            <a href="#" class="hover:text-primary transition font-medium">Kontak</a>
+            <a href="{{ route('tentang') }}" class="hover:text-primary transition font-medium">Tentang Kami</a>
+            <a href="{{ route('kontak') }}" class   ="hover:text-primary transition font-medium">Kontak</a>
         </div>
 
         <div class="hidden md:flex items-center space-x-4">
