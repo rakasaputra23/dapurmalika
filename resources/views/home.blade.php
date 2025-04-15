@@ -373,12 +373,8 @@
                         </div>
                     </div>
                     <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Nasi Tumpeng Komplit</h3>
+                        <h3 class="text-xl font-semibold mb-2">Makanan</h3>
                         <p class="text-gray-600 text-sm mb-4">Tumpeng dengan 7 macam lauk pauk tradisional</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-lg font-bold text-primary-dark">Rp850.000</span>
-                            <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm transition">Pesan</a>
-                        </div>
                     </div>
                 </div>
                 
@@ -388,12 +384,8 @@
                         <img src="/api/placeholder/600/400" alt="Nasi Kotak" class="w-full h-56 object-cover">
                     </div>
                     <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Paket Nasi Kotak Premium</h3>
+                        <h3 class="text-xl font-semibold mb-2">Paket Catering</h3>
                         <p class="text-gray-600 text-sm mb-4">Nasi dengan ayam bakar, cah kangkung, dan lalapan</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-lg font-bold text-primary-dark">Rp35.000</span>
-                            <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm transition">Pesan</a>
-                        </div>
                     </div>
                 </div>
                 
@@ -406,12 +398,8 @@
                         </div>
                     </div>
                     <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Prasmanan Executive</h3>
+                        <h3 class="text-xl font-semibold mb-2">Jajanan</h3>
                         <p class="text-gray-600 text-sm mb-4">10 pilihan menu utama dengan 3 dessert</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-lg font-bold text-primary-dark">Rp85.000</span>
-                            <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm transition">Pesan</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -421,81 +409,6 @@
                     Lihat Semua Menu
                     <i class="fas fa-arrow-right ml-2"></i>
                 </a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonial -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Kata Pelanggan Kami</h2>
-                <p class="max-w-2xl mx-auto text-gray-600">Apa kata mereka yang telah menggunakan jasa catering Dapur Malika</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Makanan dari Dapur Malika sangat lezat dan fresh. Pesanan datang tepat waktu dan presentasinya sangat cantik. Akan pesan lagi untuk acara berikutnya!"</p>
-                    <div class="flex items-center">
-                        <img src="/api/placeholder/50/50" alt="Customer" class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold">Budi Santoso</h4>
-                            <p class="text-gray-500 text-sm">Jakarta</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Sangat puas dengan layanan Dapur Malika untuk acara pernikahan kami. Tim sangat profesional dan makanannya mendapat pujian dari semua tamu."</p>
-                    <div class="flex items-center">
-                        <img src="/api/placeholder/50/50" alt="Customer" class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold">Sinta Dewi</h4>
-                            <p class="text-gray-500 text-sm">Bandung</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="text-primary">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 mb-6">"Saya rutin memesan catering untuk acara kantor dari Dapur Malika. Harga terjangkau dengan kualitas yang konsisten. Sangat direkomendasikan!"</p>
-                    <div class="flex items-center">
-                        <img src="/api/placeholder/50/50" alt="Customer" class="w-12 h-12 rounded-full object-cover">
-                        <div class="ml-4">
-                            <h4 class="font-semibold">Rudi Hartono</h4>
-                            <p class="text-gray-500 text-sm">Surabaya</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
