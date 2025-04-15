@@ -1,12 +1,17 @@
-@extends('layouts.main')
-
-@section('title', 'Menu')
+<!-- resources/views/menu.blade.php -->
+@extends('layouts.app')
 
 @section('content')
-    <h2>Menu Spesial</h2>
-    <ul>
+    <h1>Menu</h1>
+
+    <div class="menus">
         @foreach ($menus as $menu)
-            <li>{{ $menu->name }} - Rp {{ number_format($menu->price, 0, ',', '.') }}</li>
+            <div class="menu-item">
+                <h3>{{ $menu->nama }}</h3>
+                <p>{{ $menu->deskripsi }}</p>
+                <p>Harga: {{ $menu->price }}</p>
+                <img src="{{ Storage::url($menu->foto) }}" alt="Menu Image" width="100">
+            </div>
         @endforeach
-    </ul>
+    </div>
 @endsection

@@ -32,6 +32,11 @@
                         <i class="fas fa-edit"></i> Edit Profile
                     </a>
 
+                    <!-- Tambahan: Tombol ke Dashboard Admin -->
+                    <a href="{{ route('admin.dashboard') }}" class="px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-500 hover:scale-105 transition">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard Admin
+                    </a>
+
                     <!-- Tombol Kembali ke Home -->
                     <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 hover:scale-105 transition">
                         <i class="fas fa-home"></i> Kembali ke Home

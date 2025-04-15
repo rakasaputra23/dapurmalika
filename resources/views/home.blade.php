@@ -23,11 +23,12 @@
 <nav class="fixed z-50 w-full flex justify-between items-center px-6 py-4 bg-gradient-to-r from-[#ff6f00] via-[#ff9800] to-[#ffcc80] text-white shadow-md">
     <div class="text-2xl font-bold">Dapur Malika</div>
     <div class="hidden md:flex space-x-6">
-        <a href="#" class="hover:underline active:scale-95 transition">Home</a>
-        <a href="#" class="hover:underline active:scale-95 transition">Menu</a>
-        <a href="#" class="hover:underline active:scale-95 transition">Kontak</a>
-        <a href="#about" class="hover:underline active:scale-95 transition">Tentang</a>
+        <a href="{{ route('menu') }}" class="hover:underline active:scale-95 transition">Menu</a>
+        <a href="{{ route('galeri') }}" class="hover:underline active:scale-95 transition">Galeri</a>
+        <a href="{{ route('kontak') }}" class="hover:underline active:scale-95 transition">Kontak</a>
+        <a href="{{ route('tentang') }}" class="hover:underline active:scale-95 transition">Tentang</a>
     </div>
+
     <div class="hidden md:flex items-center space-x-4">
         <button onclick="toggleSearch()" class="text-white text-xl hover:scale-110 transition">
             <i class="fa-solid fa-search"></i>
