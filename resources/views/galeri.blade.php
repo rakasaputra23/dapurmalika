@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Galeri - Dapur Malika')
+
 @section('content')
 <div class="max-w-7xl mx-auto px-4 py-16">
     <h2 class="text-4xl font-bold text-center text-orange-600 mb-10">Galeri Kami</h2>

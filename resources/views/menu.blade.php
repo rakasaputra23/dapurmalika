@@ -1,6 +1,8 @@
 <!-- resources/views/menu.blade.php -->
 @extends('layouts.app')
 
+@section('title', 'Menu - Dapur Malika')
+
 @section('content')
     <h1>Menu</h1>
 

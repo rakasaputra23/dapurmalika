@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tentang Kami - Dapur Malika')
+
 @section('content')
 <div class="bg-white py-16 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto text-center">

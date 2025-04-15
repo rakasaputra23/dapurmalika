@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Dashboard Admin - Dapur Malika')
+
 @section('content')
 <div class="max-w-7xl mx-auto p-6 bg-white rounded-xl shadow-lg">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard Admin - Kelola Menu</h2>

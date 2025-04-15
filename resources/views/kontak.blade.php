@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Kontak - Dapur Malika')
+
 @section('content')
 <div class="max-w-2xl mx-auto px-4 py-16">
     <h2 class="text-4xl font-bold text-center text-orange-600 mb-10">Hubungi Kami</h2>
