@@ -37,11 +37,6 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard Admin
                     </a>
 
-                    <!-- Tombol Kembali ke Home -->
-                    <a href="{{ route('home') }}" class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 hover:scale-105 transition">
-                        <i class="fas fa-home"></i> Kembali ke Home
-                    </a>
-
                     <!-- Tombol Logout -->
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf

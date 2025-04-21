@@ -3,7 +3,10 @@
 @section('title', 'Dashboard Admin - Dapur Malika')
 
 @section('content')
-<div class="max-w-7xl mx-auto p-6 bg-white rounded-xl shadow-lg">
+<!-- Tambahkan script Alpine.js -->
+<script src="//unpkg.com/alpinejs" defer></script>
+
+<div x-data="editModal()" class="max-w-7xl mx-auto p-6 bg-white rounded-xl shadow-lg">
     <h2 class="text-3xl font-bold text-gray-800 mb-6">Dashboard Admin - Kelola Menu</h2>
 
     <!-- Notifikasi Sukses -->
@@ -51,7 +54,17 @@
                         @endif
                     </td>
                     <td class="px-4 py-2 flex justify-center gap-2">
-                        <button onclick="showEdit({{ $menu->id }}, '{{ $menu->nama }}', '{{ $menu->deskripsi }}', '{{ $menu->price }}', '{{ asset('storage/' . $menu->foto) }}')" class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-400">Edit</button>
+                        <button 
+                            @click.prevent="open({ 
+                                id: {{ $menu->id }}, 
+                                nama: @js($menu->nama), 
+                                deskripsi: @js($menu->deskripsi), 
+                                price: @js($menu->price) 
+                            })"
+                            class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-400"
+                        >
+                            Edit
+                        </button>
                         <form action="{{ route('menus.destroy', $menu->id) }}" method="POST" onsubmit="return confirm('Hapus menu ini?')">
                             @csrf
                             @method('DELETE')
@@ -63,39 +76,55 @@
             </tbody>
         </table>
     </div>
-</div>
 
-<!-- Modal Edit -->
-<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg w-full max-w-lg">
-        <form id="editForm" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            <input type="text" name="nama" id="editNama" class="input mb-2" required>
-            <input type="number" step="0.01" name="price" id="editPrice" class="input mb-2" required>
-            <textarea name="deskripsi" id="editDeskripsi" class="input mb-2" rows="3" required></textarea>
-            <input type="file" name="foto" class="mb-2">
-            <div class="flex justify-end space-x-2">
-                <button type="button" onclick="closeEdit()" class="px-4 py-2 bg-gray-400 text-white rounded">Batal</button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
-            </div>
-        </form>
+    <!-- Modal Edit dengan Alpine.js -->
+    <div 
+        x-show="isOpen" 
+        x-cloak 
+        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+        <div class="bg-white p-6 rounded-lg w-full max-w-lg">
+            <form :action="formAction" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="_method" value="PUT">
+
+                <input type="text" name="nama" x-model="form.nama" class="input mb-2 w-full" required>
+                <input type="number" step="0.01" name="price" x-model="form.price" class="input mb-2 w-full" required>
+                <textarea name="deskripsi" x-model="form.deskripsi" class="input mb-2 w-full" rows="3" required></textarea>
+                <input type="file" name="foto" class="mb-2 w-full">
+                <small class="text-gray-500 block mb-4">Biarkan kosong jika tidak ingin mengganti foto.</small>
+
+                <div class="flex justify-end space-x-2">
+                    <button type="button" @click="close" class="px-4 py-2 bg-gray-400 text-white rounded">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded">Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
+<!-- Alpine Component Script -->
 <script>
-    function showEdit(id, nama, deskripsi, price, foto) {
-        document.getElementById('editModal').classList.remove('hidden');
-        document.getElementById('editNama').value = nama;
-        document.getElementById('editDeskripsi').value = deskripsi;
-        document.getElementById('editPrice').value = price;
-        
-        // Set the action URL for the form
-        document.getElementById('editForm').action = `/admin/menus/${id}`;
-    }
-
-    function closeEdit() {
-        document.getElementById('editModal').classList.add('hidden');
+    function editModal() {
+        return {
+            isOpen: false,
+            form: {
+                nama: '',
+                deskripsi: '',
+                price: ''
+            },
+            formAction: '',
+            open(menu) {
+                this.form.nama = menu.nama;
+                this.form.deskripsi = menu.deskripsi;
+                this.form.price = menu.price;
+                this.formAction = `/admin/menus/${menu.id}`;
+                this.isOpen = true;
+            },
+            close() {
+                this.isOpen = false;
+            }
+        }
     }
 </script>
 @endsection

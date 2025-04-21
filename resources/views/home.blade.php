@@ -30,7 +30,7 @@
                 }
             }
         }
-        
+
         function toggleMenu() {
             document.getElementById("mobile-menu").classList.toggle("hidden");
         }
@@ -38,33 +38,33 @@
         function toggleSearch() {
             document.getElementById("search-bar").classList.toggle("hidden");
         }
-        
+
         // Carousel functionality
         let currentSlide = 0;
         const slides = document.querySelectorAll('#carousel > div');
-        
+
         function moveCarousel(index) {
             currentSlide = index;
             updateCarousel();
         }
-        
+
         function prevSlide() {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
             updateCarousel();
         }
-        
+
         function nextSlide() {
             currentSlide = (currentSlide + 1) % slides.length;
             updateCarousel();
         }
-        
+
         function updateCarousel() {
             const carousel = document.getElementById('carousel');
             carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
+
             // Update dots
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                if(index === currentSlide) {
+                if (index === currentSlide) {
                     dot.classList.add('bg-primary');
                     dot.classList.remove('bg-gray-300');
                 } else {
@@ -82,13 +82,25 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .animate-fade-in {
@@ -108,25 +120,45 @@
 <body class="font-sans bg-gray-50 text-gray-800">
 
     <!-- Navbar -->
-    <nav class="fixed z-50 w-full flex justify-between items-center px-6 py-4 bg-white bg-opacity-95 text-gray-800 shadow-md transition-all duration-300">
-        <div class="flex items-center">
-            <img src="/api/placeholder/50/50" alt="Logo" class="w-10 h-10 mr-3 rounded-full">
-            <div class="text-2xl font-bold bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent">Dapur Malika</div>
+    <nav class="fixed z-50 w-full flex items-center px-6 py-3 bg-white/90 backdrop-blur-md text-gray-800 shadow-sm transition-all duration-300">
+        <div class="w-1/4">
+            <!-- Logo (Left) -->
+            <div class="flex items-center">
+                <div class="relative group">
+                    <img src="/api/placeholder/50/50" alt="Logo" class="w-10 h-10 mr-3 rounded-full shadow-sm group-hover:scale-105 transition-all duration-300">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-dark to-primary-light rounded-full opacity-0 group-hover:opacity-20 transition-all duration-300 -z-10"></div>
+                </div>
+                <div class="text-2xl font-bold bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent hover:tracking-wide transition-all duration-300">Dapur Malika</div>
+            </div>
         </div>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8">
-            <a href="#" class="hover:text-primary transition font-medium">Beranda</a>
-            <a href="{{ route('menu') }}" class="hover:text-primary transition font-medium">Menu Catering</a>
-            <a href="{{ route('galeri') }}" class="hover:text-primary transition font-medium">Galeri</a>
-            <a href="{{ route('tentang') }}" class="hover:text-primary transition font-medium">Tentang Kami</a>
-            <a href="{{ route('kontak') }}" class   ="hover:text-primary transition font-medium">Kontak</a>
+        <!-- Desktop Menu (Absolute Center) -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
+            <div class="flex items-center">
+                <div class="relative mx-1 group">
+                    <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
+                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
+                </div>
+                <div class="relative mx-1 group">
+                    <a href="{{ route('menu') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Menu Catering</a>
+                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
+                </div>
+                <div class="relative mx-1 group">
+                    <a href="{{ route('galeri') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Galeri</a>
+                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
+                </div>
+                <div class="relative mx-1 group">
+                    <a href="{{ route('tentang') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Tentang Kami</a>
+                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
+                </div>
+                <div class="relative mx-1 group">
+                    <a href="{{ route('kontak') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Kontak</a>
+                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
+                </div>
+            </div>
         </div>
 
         <div class="hidden md:flex items-center space-x-4">
-            <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-full transition">
-                Pesan Sekarang
-            </a>
             
             @if($isAdmin ?? false)
                 <a href="{{ route('admin.profile') }}" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-200 transition">
@@ -152,28 +184,52 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed z-40 hidden bg-white w-full top-16 left-0 shadow-md p-4 md:hidden">
-        <div class="flex flex-col space-y-3">
-            <a href="#" class="py-2 px-4 hover:bg-gray-100 rounded-lg">Beranda</a>
-            <a href="{{ route('menu') }}" class="py-2 px-4 hover:bg-gray-100 rounded-lg">Menu Catering</a>
-            <a href="{{ route('galeri') }}" class="py-2 px-4 hover:bg-gray-100 rounded-lg">Galeri</a>
-            <a href="#" class="py-2 px-4 hover:bg-gray-100 rounded-lg">Tentang Kami</a>
-            <a href="#" class="py-2 px-4 hover:bg-gray-100 rounded-lg">Kontak</a>
-            <a href="#" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-center">
-                Pesan Sekarang
+    <div id="mobile-menu" class="fixed z-40 hidden bg-white/95 backdrop-blur-md w-full top-16 left-0 shadow-md p-5 md:hidden transition-all duration-300 ease-in-out">
+        <div class="flex flex-col space-y-2">
+            <a href="#" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
+                <span class="relative">
+                    Beranda
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
             </a>
-            
-            @if($isAdmin ?? false)
-                <a href="{{ route('admin.profile') }}" class="py-2 px-4 hover:bg-gray-100 rounded-lg flex items-center">
-                    <i class="fa-solid fa-user text-gray-700 mr-2"></i>
-                    <span>{{ $admin->name ?? 'Admin' }}</span>
-                </a>
-                <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
-                    @csrf
-                    <button type="submit" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
-                </form>
-            @endif
+            <a href="{{ route('menu') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
+                <span class="relative">
+                    Menu Catering
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
+            </a>
+            <a href="{{ route('galeri') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
+                <span class="relative">
+                    Galeri
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
+            </a>
+            <a href="{{ route('tentang') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
+                <span class="relative">
+                    Tentang Kami
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
+            </a>
+            <a href="{{ route('kontak') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
+                <span class="relative">
+                    Kontak
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                </span>
+            </a>
         </div>
+    </div>
+
+    @if($isAdmin ?? false)
+    <a href="{{ route('admin.profile') }}" class="py-2 px-4 hover:bg-gray-100 rounded-lg flex items-center">
+        <i class="fa-solid fa-user text-gray-700 mr-2"></i>
+        <span>{{ $admin->name ?? 'Admin' }}</span>
+    </a>
+    <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
+        @csrf
+        <button type="submit" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
+    </form>
+    @endif
+    </div>
     </div>
 
     <!-- Search Bar -->
@@ -208,7 +264,7 @@
         <div class="max-w-6xl mx-auto">
             <h2 class="text-3xl font-bold text-center mb-2">Promo Terbaru</h2>
             <p class="text-center text-gray-600 mb-10">Nikmati penawaran spesial dari Dapur Malika</p>
-            
+
             <!-- Carousel Container -->
             <div class="relative">
                 <div class="overflow-hidden">
@@ -233,7 +289,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Promo 2 -->
                         <div class="min-w-full px-2">
                             <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl shadow-lg overflow-hidden">
@@ -254,7 +310,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Promo 3 -->
                         <div class="min-w-full px-2">
                             <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl shadow-lg overflow-hidden">
@@ -277,14 +333,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Carousel Navigation -->
                 <div class="flex justify-center mt-8">
                     <button onclick="moveCarousel(0)" class="w-3 h-3 rounded-full bg-primary mx-1 carousel-dot"></button>
                     <button onclick="moveCarousel(1)" class="w-3 h-3 rounded-full bg-gray-300 mx-1 carousel-dot"></button>
                     <button onclick="moveCarousel(2)" class="w-3 h-3 rounded-full bg-gray-300 mx-1 carousel-dot"></button>
                 </div>
-                
+
                 <!-- Carousel Controls -->
                 <button onclick="prevSlide()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-md focus:outline-none">
                     <i class="fas fa-chevron-left text-xl text-primary"></i>
@@ -303,7 +359,7 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Mengapa Memilih Dapur Malika?</h2>
                 <p class="max-w-2xl mx-auto text-gray-600">Dapur Malika telah melayani ribuan pelanggan dengan hidangan autentik Indonesia sejak 2015. Kami berkomitmen untuk memberikan pengalaman kuliner terbaik.</p>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
@@ -312,7 +368,7 @@
                     <h3 class="text-xl font-semibold mb-4">Kualitas Premium</h3>
                     <p class="text-gray-600">Kami hanya menggunakan bahan-bahan berkualitas tinggi dan segar untuk setiap hidangan yang kami sajikan.</p>
                 </div>
-                
+
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
                         <i class="fas fa-headset text-primary text-2xl"></i>
@@ -320,7 +376,7 @@
                     <h3 class="text-xl font-semibold mb-4">Layanan Responsif</h3>
                     <p class="text-gray-600">Tim kami siap membantu Anda 24/7 dengan layanan pelanggan yang ramah dan profesional.</p>
                 </div>
-                
+
                 <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
                     <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
                         <i class="fas fa-truck text-primary text-2xl"></i>
@@ -329,13 +385,9 @@
                     <p class="text-gray-600">Kami menjamin pengiriman pesanan Anda tepat waktu untuk berbagai acara penting Anda.</p>
                 </div>
             </div>
-            
+
             <!-- Statistics -->
             <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-primary">5,000+</div>
-                    <p class="text-gray-600 mt-2">Pesanan Sukses</p>
-                </div>
                 <div class="text-center">
                     <div class="text-4xl font-bold text-primary">100+</div>
                     <p class="text-gray-600 mt-2">Variasi Menu</p>
@@ -343,10 +395,6 @@
                 <div class="text-center">
                     <div class="text-4xl font-bold text-primary">50+</div>
                     <p class="text-gray-600 mt-2">Acara Besar</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-primary">4.9</div>
-                    <p class="text-gray-600 mt-2">Rating Kepuasan</p>
                 </div>
             </div>
         </div>
@@ -359,22 +407,18 @@
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Menu Favorit Kami</h2>
                 <p class="max-w-2xl mx-auto text-gray-600">Hidangan pilihan chef yang paling diminati pelanggan kami</p>
             </div>
-            
+
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Menu Item 1 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
                     <div class="relative">
                         <img src="/api/placeholder/600/400" alt="Nasi Tumpeng" class="w-full h-56 object-cover">
-                        <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Terlaris
-                        </div>
                     </div>
                     <div class="px-6 py-4">
                         <h3 class="text-xl font-semibold mb-2">Makanan</h3>
-                        <p class="text-gray-600 text-sm mb-4">Tumpeng dengan 7 macam lauk pauk tradisional</p>
                     </div>
                 </div>
-                
+
                 <!-- Menu Item 2 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
                     <div class="relative">
@@ -382,25 +426,20 @@
                     </div>
                     <div class="px-6 py-4">
                         <h3 class="text-xl font-semibold mb-2">Paket Catering</h3>
-                        <p class="text-gray-600 text-sm mb-4">Nasi dengan ayam bakar, cah kangkung, dan lalapan</p>
                     </div>
                 </div>
-                
+
                 <!-- Menu Item 3 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
                     <div class="relative">
                         <img src="/api/placeholder/600/400" alt="Prasmanan" class="w-full h-56 object-cover">
-                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Baru
-                        </div>
                     </div>
                     <div class="px-6 py-4">
                         <h3 class="text-xl font-semibold mb-2">Jajanan</h3>
-                        <p class="text-gray-600 text-sm mb-4">10 pilihan menu utama dengan 3 dessert</p>
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center mt-10">
                 <a href="{{ route('menu') }}" class="inline-flex items-center text-primary hover:text-primary-dark font-medium">
                     Lihat Semua Menu
@@ -409,7 +448,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- CTA Section -->
     <section class="py-16 bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white">
         <div class="max-w-4xl mx-auto px-4 text-center">
@@ -435,4 +474,5 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 </body>
+
 </html>

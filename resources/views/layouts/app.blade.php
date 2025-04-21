@@ -40,15 +40,6 @@
     <!-- Overlay Blur -->
     <div class="bg-overlay"></div>
 
-    <body>
-    @include('partials.navbar')
-
-    <!-- Konten -->
-    <div class="min-h-screen pt-24">
-        @yield('content')
-    </div>
-
-
     <!-- Konten -->
     <div class="min-h-screen flex items-center justify-center">
         @yield('content')
