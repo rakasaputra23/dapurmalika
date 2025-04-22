@@ -22,6 +22,8 @@ Route::get('/tentang', [PublicPageController::class, 'tentang'])->name('tentang'
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
+Route::get('/galeri', [App\Http\Controllers\GaleriPageController::class, 'index'])->name('galeri');
+
 Route::get('/', function () {
     return view('home', [
         'isAdmin' => Auth::guard('admin')->check(),
@@ -47,6 +49,11 @@ Route::prefix('admin')->group(function () {
 
         // Dashboard Route
         Route::get('/dashboard', [MenuController::class, 'index'])->name('admin.dashboard');
+
+        Route::get('/admin/galeri', [App\Http\Controllers\GaleriController::class, 'index'])->name('galeri.index');
+    Route::post('/admin/galeri', [App\Http\Controllers\GaleriController::class, 'store'])->name('galeri.store');
+    Route::put('/admin/galeri/{galeri}', [App\Http\Controllers\GaleriController::class, 'update'])->name('galeri.update');
+    Route::delete('/admin/galeri/{galeri}', [App\Http\Controllers\GaleriController::class, 'destroy'])->name('galeri.destroy');
 
     });
 });

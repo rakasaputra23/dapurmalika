@@ -13,16 +13,17 @@ class AdminController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
-            // Redirect ke home dengan membawa data admin
-            return redirect()->route('home');
-        }
-
-        return back()->with('error', 'Email atau password salah.');
+    if (Auth::guard('admin')->attempt($credentials, $request->filled('remember'))) {
+        // Redirect langsung ke dashboard admin setelah login
+        return redirect()->route('admin.profile');
     }
+
+    return back()->with('error', 'Email atau password salah.');
+}
+
 
     public function logout(Request $request)
     {

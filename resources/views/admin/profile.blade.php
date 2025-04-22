@@ -37,6 +37,10 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard Admin
                     </a>
 
+                    <a href="{{ route('galeri.index') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500">
+                        Kelola Galeri
+                    </a>
+
                     <!-- Tombol Logout -->
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf

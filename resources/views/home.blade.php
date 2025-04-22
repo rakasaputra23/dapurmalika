@@ -159,17 +159,7 @@
         </div>
 
         <div class="hidden md:flex items-center space-x-4">
-            
-            @if($isAdmin ?? false)
-                <a href="{{ route('admin.profile') }}" class="flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow-md hover:bg-gray-200 transition">
-                    <i class="fa-solid fa-user text-gray-700 text-lg"></i>
-                    <span class="text-black font-semibold">{{ $admin->name ?? 'Admin' }}</span>
-                </a>
-                <form action="{{ route('admin.logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
-                </form>
-            @endif
+            <!-- Admin section removed -->
         </div>
 
         <!-- Mobile Menu Button -->
@@ -219,18 +209,7 @@
         </div>
     </div>
 
-    @if($isAdmin ?? false)
-    <a href="{{ route('admin.profile') }}" class="py-2 px-4 hover:bg-gray-100 rounded-lg flex items-center">
-        <i class="fa-solid fa-user text-gray-700 mr-2"></i>
-        <span>{{ $admin->name ?? 'Admin' }}</span>
-    </a>
-    <form action="{{ route('admin.logout') }}" method="POST" class="w-full">
-        @csrf
-        <button type="submit" class="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
-    </form>
-    @endif
-    </div>
-    </div>
+    <!-- Admin section in mobile menu removed -->
 
     <!-- Search Bar -->
     <div id="search-bar" class="hidden fixed top-16 left-0 w-full bg-white shadow-md p-4 flex justify-center z-40">
