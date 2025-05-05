@@ -14,17 +14,6 @@
             <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Indulge in rich flavors and hand-crafted dishes from the heart of Indonesia</p>
         </div>
 
-        <!-- Filters -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12" id="category-filters">
-            @php $activeCategory = request('category') ?? 'Semua'; @endphp
-            @foreach (['Semua', 'Makanan', 'Paket Catering', 'Jajanan'] as $category)
-            <button data-category="{{ $category }}"
-                class="category-btn px-6 py-2 rounded-full font-medium transition
-              {{ $activeCategory === $category ? 'bg-amber-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100' }}">
-                {{ $category }}
-            </button>
-            @endforeach
-        </div>
 
         <!-- Menu Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate__animated animate__fadeInUp">
@@ -45,20 +34,6 @@
                         <span class="text-amber-600 font-semibold text-base">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
                     </div>
                     <p class="text-sm text-gray-600 mb-4">{{ $menu->deskripsi }}</p>
-
-                    <div class="flex items-center text-xs text-gray-500 space-x-4">
-                        @if($menu->spicy_level > 0)
-                        <span class="flex items-center">
-                            🌶️ {{ $menu->spicy_level }}/5
-                        </span>
-                        @endif
-
-                        @if($menu->is_vegetarian)
-                        <span class="flex items-center">
-                            🥬 Vegetarian
-                        </span>
-                        @endif
-                    </div>
 
                     <div x-data="orderModal()" class="relative">
 
@@ -116,39 +91,50 @@
                                     </div>
                                 </div>
 
-                                <!-- Form Section -->
-                                <div class="space-y-3">
+                                <!-- Compact Form Section -->
+                                <div class="space-y-2">
+                                    <!-- Nama Pemesan -->
                                     <div>
-                                        <label class="flex items-center mb-1 text-sm font-medium text-gray-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <label class="flex items-center text-xs font-medium text-gray-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                            Nama Pemesan
+                                        </label>
+                                        <input type="text" x-model="name" placeholder="Contoh: Budi" required
+                                            class="w-full border border-gray-300 rounded px-2.5 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-400 mt-0.5">
+                                    </div>
+
+                                    <!-- Jumlah Porsi -->
+                                    <div>
+                                        <label class="flex items-center text-xs font-medium text-gray-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                             </svg>
                                             Jumlah Porsi
                                         </label>
-                                        <div class="flex rounded-md shadow-sm">
-                                            <button @click="qty > 1 ? qty-- : qty = 1" class="px-3 bg-gray-100 border border-r-0 border-gray-300 rounded-l text-gray-600 hover:bg-gray-200 focus:outline-none">-</button>
-                                            <input type="number" x-model="qty" min="1" class="w-full border border-gray-300 px-3 py-1.5 text-center focus:outline-none focus:ring-1 focus:ring-amber-400" />
-                                            <button @click="qty++" class="px-3 bg-gray-100 border border-l-0 border-gray-300 rounded-r text-gray-600 hover:bg-gray-200 focus:outline-none">+</button>
+                                        <div class="flex rounded-md shadow-sm mt-0.5">
+                                            <button @click="qty > 1 ? qty-- : qty = 1" class="px-2 bg-gray-100 border border-r-0 border-gray-300 rounded-l text-gray-600 hover:bg-gray-200 focus:outline-none text-xs">-</button>
+                                            <input type="number" x-model="qty" min="1" class="w-full border border-gray-300 px-2 py-1 text-center text-xs focus:outline-none focus:ring-1 focus:ring-amber-400" />
+                                            <button @click="qty++" class="px-2 bg-gray-100 border border-l-0 border-gray-300 rounded-r text-gray-600 hover:bg-gray-200 focus:outline-none text-xs">+</button>
                                         </div>
                                     </div>
 
+                                    <!-- Catatan -->
                                     <div>
-                                        <label class="flex items-center mb-1 text-sm font-medium text-gray-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <label class="flex items-center text-xs font-medium text-gray-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                             Catatan (opsional)
                                         </label>
-                                        <textarea x-model="note" rows="2" placeholder="Misal: tanpa cabai, pedas level 2, dll."
-                                            class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-400"></textarea>
+                                        <textarea x-model="note" rows="1" placeholder="Misal: tanpa cabai, pedas level 2, dll."
+                                            class="w-full border border-gray-300 rounded px-2.5 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-amber-400 placeholder-gray-400 mt-0.5"></textarea>
                                     </div>
                                 </div>
 
                                 <!-- Action Buttons -->
-                                <div class="flex justify-end gap-2 mt-4 pt-2 border-t">
-                                    <button @click="showModal = false" class="px-4 py-1.5 rounded-lg bg-gray-100 text-gray-700 text-sm hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
-                                        Batal
-                                    </button>
+                                <div class="flex justify-center mt-4 gap-2 mt-4 pt-2 border-t">
                                     <a :href="whatsappLink()" target="_blank"
                                         class="px-4 py-1.5 rounded-lg bg-amber-500 text-white text-sm hover:bg-amber-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
@@ -226,6 +212,7 @@
             price: 0,
             qty: 1,
             note: '',
+            name: '',
 
             openOrderModal(name, price) {
                 this.menuName = name;
@@ -241,7 +228,7 @@
 
             whatsappLink() {
                 const total = this.qty * this.price;
-                const text = `Halo, saya ingin memesan:%0A%0A📋 *Detail Pesanan*:%0A• Menu: ${this.menuName}%0A• Jumlah: ${this.qty} porsi%0A• Harga: Rp${this.formatPrice(this.price)}%0A• Total: Rp${this.formatPrice(total)}%0A%0A📝 Catatan: ${this.note || '-'}`;
+                const text = `Halo, saya ${this.name} ingin memesan:%0A%0A📋 *Detail Pesanan*:%0A• Menu: ${this.menuName}%0A• Jumlah: ${this.qty} porsi%0A• Harga: Rp${this.formatPrice(this.price)}%0A• Total: Rp${this.formatPrice(total)}%0A%0A📝 Catatan: ${this.note || '-'}`;
                 return `https://wa.me/6285781192748?text=${text}`;
             }
         }
