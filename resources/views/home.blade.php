@@ -136,7 +136,7 @@
         <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
             <div class="flex items-center">
                 <div class="relative mx-1 group">
-                    <a href="#" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
+                    <a href="{{ route('home') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
                     <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
                 </div>
                 <div class="relative mx-1 group">
@@ -208,8 +208,6 @@
             </a>
         </div>
     </div>
-
-    <!-- Admin section in mobile menu removed -->
 
     <!-- Search Bar -->
     <div id="search-bar" class="hidden fixed top-16 left-0 w-full bg-white shadow-md p-4 flex justify-center z-40">

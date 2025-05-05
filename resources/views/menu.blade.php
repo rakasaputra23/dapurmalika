@@ -6,8 +6,8 @@
 @section('content')
 <script src="https://unpkg.com/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
 
-<div class="menu-container bg-gradient-to-b from-white to-gray-100 py-16 px-6 sm:px-10 lg:px-20 min-h-screen">
-    <div class="max-w-7xl mx-auto">
+<div class="menu-container w-screen h-screen bg-gradient-to-b from-white to-gray-100 p-0 overflow-auto">
+    <div class="w-full px-4 sm:px-6 lg:px-8">
         <!-- Header Section -->
         <div class="text-center mb-16">
             <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight">Explore Our Menu</h1>
@@ -33,6 +33,7 @@
                         <h3 class="text-lg font-bold text-gray-900">{{ $menu->nama }}</h3>
                         <span class="text-amber-600 font-semibold text-base">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
                     </div>
+                    <h2 class="text-sm text-gray-600 mb-4">Kategori : </h2>
                     <p class="text-sm text-gray-600 mb-4">{{ $menu->deskripsi }}</p>
 
                     <div x-data="orderModal()" class="relative">

@@ -14,7 +14,7 @@ Route::prefix('admin')->middleware('admin.auth')->group(function () {
 });
 
 
-
+Route::get('/home', [PublicPageController::class, 'home'])->name('home');
 Route::get('/menu', [PublicPageController::class, 'menu'])->name('menu');
 Route::get('/galeri', [PublicPageController::class, 'galeri'])->name('galeri');
 Route::get('/kontak', [PublicPageController::class, 'kontak'])->name('kontak');
