@@ -1,108 +1,146 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title', 'Profil Admin - Dapur Malika')
 
 @section('content')
-<div class="relative flex justify-center items-center w-screen h-screen">
-    <!-- Background dengan efek blur -->
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style="background-image: url('/images/background.jpg'); 
-               filter: blur(15px); 
-               transform: scale(1.1);">
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Profil Admin</h1>
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Profil Admin</li>
+        </ol>
     </div>
 
-    <!-- Overlay semi-transparan agar konten lebih terbaca -->
-    <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-
-    <div class="relative w-full max-w-3xl bg-white bg-opacity-80 shadow-xl rounded-2xl p-10 backdrop-blur-lg animate-fadeIn">
-        
-        <!-- Header Admin -->
-        <div class="flex flex-col md:flex-row items-center md:items-start">
-            <!-- Avatar -->
-            <div class="flex-shrink-0">
-                <i class="fas fa-user-circle text-gray-700 text-7xl md:text-8xl"></i>
-            </div>
-
-            <!-- Info Admin -->
-            <div class="ml-0 md:ml-6 mt-6 md:mt-0 text-center md:text-left">
-                <h2 class="text-3xl font-bold text-gray-800">{{ Auth::guard('admin')->user()->name }}</h2>
-                <p class="text-gray-500 mt-1">{{ Auth::guard('admin')->user()->email }}</p>
-
-                <div class="flex flex-wrap justify-center md:justify-start mt-4 space-x-3">
-                    <!-- Tombol Edit Profile -->
-                    <a href="{{ route('admin.editProfile') }}" class="px-5 py-2 bg-gradient-to-r from-[#ff6f00] via-[#ff9800] to-[#ffcc80] text-white rounded-lg hover:shadow-lg hover:scale-105 transition">
-                        <i class="fas fa-edit"></i> Edit Profile
-                    </a>
-
-                    <!-- Tambahan: Tombol ke Dashboard Admin -->
-                    <a href="{{ route('admin.dashboard') }}" class="px-5 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-500 hover:scale-105 transition">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard Admin
-                    </a>
-
-                    <a href="{{ route('galeri.index') }}" class="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500">
-                        Kelola Galeri
-                    </a>
-
-                    <!-- Tombol Logout -->
-                    <form action="{{ route('admin.logout') }}" method="POST">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Foto Profil</h6>
+                </div>
+                <div class="card-body text-center">
+                    <form action="{{ route('admin.updateProfilePicture') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <button type="submit" class="px-5 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 hover:scale-105 transition">
-                            <i class="fas fa-sign-out-alt"></i> Logout
+                        <div class="mb-3">
+                            @if(Auth::guard('admin')->user()->profile_picture)
+                                <img src="{{ asset('storage/' . Auth::guard('admin')->user()->profile_picture) }}" 
+                                     class="img-thumbnail rounded-circle mb-3" 
+                                     style="width: 200px; height: 200px; object-fit: cover;" 
+                                     alt="Foto Profil">
+                            @else
+                                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center mb-3" 
+                                     style="width: 200px; height: 200px; margin: 0 auto;">
+                                    <i class="fas fa-user-circle text-secondary" style="font-size: 150px;"></i>
+                                </div>
+                            @endif
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input @error('profile_picture') is-invalid @enderror" 
+                                       id="profile_picture" name="profile_picture" accept="image/*">
+                                <label class="custom-file-label" for="profile_picture">Pilih foto...</label>
+                                @error('profile_picture')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload me-1"></i> Unggah Foto
                         </button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <!-- Admin Details -->
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gray-100 p-6 rounded-lg shadow-md flex items-center space-x-3">
-                <i class="fas fa-user-tie text-3xl text-[#ff6f00]"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Jabatan</h3>
-                    <p class="text-gray-600">Administrator</p>
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 font-weight-bold text-primary">Informasi Profil</h6>
+                    <a href="{{ route('admin.editProfile') }}" class="btn btn-sm btn-primary">
+                        <i class="fas fa-edit me-1"></i> Edit Profil
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Nama Lengkap</label>
+                            <p>{{ Auth::guard('admin')->user()->name }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Email</label>
+                            <p>{{ Auth::guard('admin')->user()->email }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tempat Lahir</label>
+                            <p>{{ Auth::guard('admin')->user()->birth_place ?? '-' }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Tanggal Lahir</label>
+                            <p>
+                                @if(Auth::guard('admin')->user()->birth_date)
+                                    {{ \Carbon\Carbon::parse(Auth::guard('admin')->user()->birth_date)->format('d F Y') }}
+                                @else
+                                    -
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label class="form-label fw-bold">Alamat</label>
+                            <p>{{ Auth::guard('admin')->user()->address ?? '-' }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Bergabung Sejak</label>
+                            <p>{{ Auth::guard('admin')->user()->created_at->format('d F Y') }}</p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">Terakhir Diperbarui</label>
+                            <p>{{ Auth::guard('admin')->user()->updated_at->format('d F Y H:i') }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="bg-gray-100 p-6 rounded-lg shadow-md flex items-center space-x-3">
-                <i class="fas fa-calendar-alt text-3xl text-[#ff6f00]"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Bergabung Sejak</h3>
-                    <p class="text-gray-600">
-                        {{ Auth::guard('admin')->user()->created_at->format('d M Y') }}
-                    </p>
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Aksi Cepat</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-tachometer-alt me-1"></i> Dashboard
+                        </a>
+                        <a href="{{ route('menus.index') }}" class="btn btn-outline-success">
+                            <i class="fas fa-utensils me-1"></i> Kelola Menu
+                        </a>
+                        <a href="{{ route('galeri.index') }}" class="btn btn-outline-info">
+                            <i class="fas fa-images me-1"></i> Kelola Galeri
+                        </a>
+                        <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger">
+                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-
-            <div class="bg-gray-100 p-6 rounded-lg shadow-md flex items-center space-x-3">
-                <i class="fas fa-map-marker-alt text-3xl text-[#ff6f00]"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Alamat</h3>
-                    <p class="text-gray-600">{{ Auth::guard('admin')->user()->address ?? '-' }}</p>
-                </div>
-            </div>
-
-            <div class="bg-gray-100 p-6 rounded-lg shadow-md flex items-center space-x-3">
-                <i class="fas fa-city text-3xl text-[#ff6f00]"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Tempat Lahir</h3>
-                    <p class="text-gray-600">{{ Auth::guard('admin')->user()->birth_place ?? '-' }}</p>
-                </div>
-            </div>
-
-            <div class="bg-gray-100 p-6 rounded-lg shadow-md flex items-center space-x-3">
-                <i class="fas fa-birthday-cake text-3xl text-[#ff6f00]"></i>
-                <div>
-                    <h3 class="text-lg font-semibold text-gray-800">Tanggal Lahir</h3>
-                    <p class="text-gray-600">
-                        {{ Auth::guard('admin')->user()->birth_date ? \Carbon\Carbon::parse(Auth::guard('admin')->user()->birth_date)->format('d M Y') : '-' }}
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-10 text-center text-gray-500 text-sm">
-            <p>&copy; 2025 Dapur Malika - All Rights Reserved</p>
         </div>
     </div>
 </div>
+@endsection
+
+@section('additional_scripts')
+<script>
+    // Menampilkan nama file yang dipilih untuk upload
+    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+        var fileName = document.getElementById("profile_picture").files[0].name;
+        var nextSibling = e.target.nextElementSibling;
+        nextSibling.innerText = fileName;
+    });
+
+    // Auto-close alert
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function() {
+            $(this).remove();
+        });
+    }, 5000);
+</script>
 @endsection

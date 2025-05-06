@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
 {
-    Schema::table('admins', function (Blueprint $table) {
-        $table->string('birth_place')->after('some_column'); // Sesuaikan dengan kolom yang ada
+    Schema::table('menus', function (Blueprint $table) {
+        $table->boolean('is_popular')->default(false)->after('deskripsi');
     });
 }
 
 public function down()
 {
-    Schema::table('admins', function (Blueprint $table) {
-        $table->dropColumn('birth_place');
+    Schema::table('menus', function (Blueprint $table) {
+        $table->dropColumn('is_popular');
     });
 }
-
 };
