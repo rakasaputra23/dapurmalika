@@ -40,9 +40,6 @@
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center">
-            <button onclick="toggleSearch()" class="text-gray-700 px-2">
-                <i class="fa-solid fa-search"></i>
-            </button>
             <button onclick="toggleMenu()" class="text-gray-700 p-2">
                 <i class="fa-solid fa-bars"></i>
             </button>

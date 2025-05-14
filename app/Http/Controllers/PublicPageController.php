@@ -17,6 +17,11 @@ class PublicPageController extends Controller
         return view('galeri');
     }
 
+    public function home() {
+        return view('home');
+    }
+
+
     public function kontak() {
         return view('kontak');
     }

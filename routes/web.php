@@ -10,6 +10,10 @@ use App\Http\Controllers\PublicPageController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\GaleriPageController;
+use App\Http\Controllers\KontakController;
+
+
+
 
 // Public Routes
 Route::get('/', function () {
@@ -70,5 +74,7 @@ Route::prefix('admin')->group(function () {
         Route::put('/galeri/{galeri}', [GaleriController::class, 'update'])->name('galeri.update');
         Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
     });
+
+    Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
     
 });

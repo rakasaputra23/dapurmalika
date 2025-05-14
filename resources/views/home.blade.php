@@ -164,9 +164,6 @@
 
         <!-- Mobile Menu Button -->
         <div class="md:hidden flex items-center">
-            <button onclick="toggleSearch()" class="text-gray-700 px-2">
-                <i class="fa-solid fa-search"></i>
-            </button>
             <button onclick="toggleMenu()" class="text-gray-700 p-2">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -209,18 +206,8 @@
         </div>
     </div>
 
-    <!-- Search Bar -->
-    <div id="search-bar" class="hidden fixed top-16 left-0 w-full bg-white shadow-md p-4 flex justify-center z-40">
-        <div class="w-full max-w-2xl relative">
-            <input type="text" id="search-input" placeholder="Cari menu..." class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-            <button class="absolute right-3 top-2.5 text-gray-500 hover:text-primary">
-                <i class="fa-solid fa-search text-lg"></i>
-            </button>
-        </div>
-    </div>
-
     <!-- Hero Section -->
-    <header class="relative w-full h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://source.unsplash.com/1600x900/?indonesian,food');">
+    <header class="relative w-full h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('images/home.jpg') }}');">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-20 text-center text-white px-4 max-w-4xl">
             <h1 class="text-4xl md:text-6xl font-bold animate-fade-in">Nikmati Kelezatan Masakan Indonesia</h1>
