@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminPasswordResetController;
 use App\Http\Controllers\SearchController;
@@ -12,22 +13,17 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\GaleriPageController;
 use App\Http\Controllers\KontakController;
 
-
-
-
 // Public Routes
-Route::get('/', function () {
-    return view('home', [
-        'isAdmin' => Auth::guard('admin')->check(),
-        'admin' => Auth::guard('admin')->user()
-    ]);
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [PublicPageController::class, 'home'])->name('home');
+// (Opsional) Jika /home tidak dibutuhkan, bisa dihapus atau redirect ke /
+Route::get('/home', function () {
+    return redirect()->route('home');
+});
+
 Route::get('/menu', [MenuController::class, 'menuPublik'])->name('menu');
 Route::get('/kontak', [PublicPageController::class, 'kontak'])->name('kontak');
 Route::get('/tentang', [PublicPageController::class, 'tentang'])->name('tentang');
-Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 // Galeri Halaman Publik
 Route::get('/galeri', [GaleriPageController::class, 'index'])->name('galeri');
@@ -58,11 +54,7 @@ Route::prefix('admin')->group(function () {
         // Profile
         Route::get('/profile', [AdminController::class, 'showProfile'])->name('admin.profile');
         Route::get('/profile/edit', [AdminController::class, 'editProfile'])->name('admin.editProfile');
-        
-        // Perbaiki method untuk updateProfile, sesuaikan dengan metode POST
         Route::post('/profile/update', [AdminController::class, 'updateProfile'])->name('admin.updateProfile');
-        
-        // Perbaiki route untuk update profile picture
         Route::post('/profile/update-picture', [AdminController::class, 'updateProfilePicture'])->name('admin.updateProfilePicture');
     
         // Menu Management
@@ -76,5 +68,4 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
-    
 });

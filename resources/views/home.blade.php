@@ -364,54 +364,66 @@
         </div>
     </section>
 
-    <!-- Featured Menu -->
-    <section id="menu" class="py-16 bg-white">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Menu Favorit Kami</h2>
-                <p class="max-w-2xl mx-auto text-gray-600">Hidangan pilihan chef yang paling diminati pelanggan kami</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Menu Item 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
-                    <div class="relative">
-                        <img src="/api/placeholder/600/400" alt="Nasi Tumpeng" class="w-full h-56 object-cover">
-                    </div>
-                    <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Makanan</h3>
-                    </div>
-                </div>
-
-                <!-- Menu Item 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
-                    <div class="relative">
-                        <img src="/api/placeholder/600/400" alt="Nasi Kotak" class="w-full h-56 object-cover">
-                    </div>
-                    <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Paket Catering</h3>
-                    </div>
-                </div>
-
-                <!-- Menu Item 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
-                    <div class="relative">
-                        <img src="/api/placeholder/600/400" alt="Prasmanan" class="w-full h-56 object-cover">
-                    </div>
-                    <div class="px-6 py-4">
-                        <h3 class="text-xl font-semibold mb-2">Jajanan</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-10">
-                <a href="{{ route('menu') }}" class="inline-flex items-center text-primary hover:text-primary-dark font-medium">
-                    Lihat Semua Menu
-                    <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
+<!-- Featured Menu -->
+<section id="menu" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Menu Favorit Kami</h2>
+            <p class="max-w-2xl mx-auto text-gray-600">Hidangan pilihan chef yang paling diminati pelanggan kami</p>
         </div>
-    </section>
+
+        <!-- Tampilkan kategori satu per satu -->
+        @foreach($kategoris as $kategori)
+            @if($kategori->menus->isNotEmpty())
+                <div class="mb-12">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-amber-200">
+                        {{ $kategori->nama }}
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach($kategori->menus->take(3) as $menu)
+                            <div class="menu-item bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                                <!-- Gambar -->
+                                <div class="relative h-56 overflow-hidden">
+                                    <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
+                                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                                    <span class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                                        {{ $kategori->nama }}
+                                    </span>
+                                </div>
+
+                                <!-- Konten -->
+                                <div class="px-6 py-4">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h3 class="text-xl font-semibold text-gray-900">{{ $menu->nama }}</h3>
+                                        <span class="text-amber-600 font-semibold">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $menu->deskripsi }}</p>
+
+                                    <a href="{{ route('menu') }}"
+                                        class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2 shadow">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        Pesan Sekarang
+                                    </a>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        @endforeach
+
+        <div class="text-center mt-10">
+            <a href="{{ route('menu') }}" class="inline-flex items-center text-primary hover:text-primary-dark font-medium">
+                Lihat Semua Menu
+                <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- CTA Section -->
     <section class="py-16 bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white">
