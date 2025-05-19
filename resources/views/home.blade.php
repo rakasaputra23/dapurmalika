@@ -38,41 +38,6 @@
         function toggleSearch() {
             document.getElementById("search-bar").classList.toggle("hidden");
         }
-
-        // Carousel functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('#carousel > div');
-
-        function moveCarousel(index) {
-            currentSlide = index;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateCarousel();
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const carousel = document.getElementById('carousel');
-            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-            // Update dots
-            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                if (index === currentSlide) {
-                    dot.classList.add('bg-primary');
-                    dot.classList.remove('bg-gray-300');
-                } else {
-                    dot.classList.remove('bg-primary');
-                    dot.classList.add('bg-gray-300');
-                }
-            });
-        }
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -119,311 +84,182 @@
 
 <body class="font-sans bg-gray-50 text-gray-800">
 
-    <!-- Navbar -->
-    <nav class="fixed z-50 w-full flex items-center px-6 py-3 bg-white/90 backdrop-blur-md text-gray-800 shadow-sm transition-all duration-300">
-        <div class="w-1/4">
-            <!-- Logo (Left) -->
-            <div class="flex items-center">
-                <div class="relative group">
-                    <img src="/api/placeholder/50/50" alt="Logo" class="w-10 h-10 mr-3 rounded-full shadow-sm group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-dark to-primary-light rounded-full opacity-0 group-hover:opacity-20 transition-all duration-300 -z-10"></div>
-                </div>
-                <div class="text-2xl font-bold bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent hover:tracking-wide transition-all duration-300">Dapur Malika</div>
-            </div>
-        </div>
+    @include('partials.navbar')
 
-        <!-- Desktop Menu (Absolute Center) -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
-            <div class="flex items-center">
-                <div class="relative mx-1 group">
-                    <a href="{{ route('home') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('menu') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Menu Catering</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('galeri') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Galeri</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('tentang') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Tentang Kami</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('kontak') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Kontak</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="hidden md:flex items-center space-x-4">
-            <!-- Admin section removed -->
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden flex items-center">
-            <button onclick="toggleMenu()" class="text-gray-700 p-2">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed z-40 hidden bg-white/95 backdrop-blur-md w-full top-16 left-0 shadow-md p-5 md:hidden transition-all duration-300 ease-in-out">
-        <div class="flex flex-col space-y-2">
-            <a href="#" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Beranda
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('menu') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Menu Catering
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('galeri') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Galeri
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('tentang') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Tentang Kami
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('kontak') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Kontak
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <header class="relative w-full h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('{{ asset('images/home.jpg') }}');">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative z-20 text-center text-white px-4 max-w-4xl">
-            <h1 class="text-4xl md:text-6xl font-bold animate-fade-in">Nikmati Kelezatan Masakan Indonesia</h1>
-            <p class="mt-6 text-lg md:text-xl animate-fade-in-delayed">Dapur Malika menyajikan hidangan Indonesia autentik dengan bahan-bahan premium untuk setiap acara spesial Anda</p>
-            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4 animate-slide-up">
-                <a href="#" class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-full font-medium transition">
+    <!-- Hero Section with Modern Design -->
+    <header class="relative w-full h-screen bg-cover bg-center" style="background-image: url('{{ asset('images/home.jpg') }}');">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+        <div class="relative z-20 h-full flex flex-col items-center justify-center text-center text-white px-6 max-w-5xl mx-auto">
+            <span class="text-amber-400 text-lg font-medium mb-3 tracking-wider animate-fade-in">SELAMAT DATANG DI</span>
+            <h1 class="text-5xl md:text-7xl font-bold animate-fade-in leading-tight">Dapur <span class="text-amber-400">Malika</span></h1>
+            <p class="mt-6 text-lg md:text-xl animate-fade-in-delayed max-w-2xl opacity-90">Dapur Malika menyajikan hidangan Indonesia autentik dengan bahan-bahan premium untuk setiap acara spesial Anda</p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-5 animate-slide-up">
+                <a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium transition duration-300 shadow-lg hover:shadow-amber-500/30">
                     Pesan Sekarang
                 </a>
-                <a href="#menu" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full font-medium transition">
+                <a href="#menu" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-full font-medium transition duration-300">
                     Lihat Menu
                 </a>
             </div>
         </div>
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <a href="#about" class="text-white opacity-70 hover:opacity-100 transition">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </a>
+        </div>
     </header>
 
-    <!-- Promo Carousel Section -->
-    <section class="py-16 px-4 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-2">Promo Terbaru</h2>
-            <p class="text-center text-gray-600 mb-10">Nikmati penawaran spesial dari Dapur Malika</p>
-
-            <!-- Carousel Container -->
-            <div class="relative">
-                <div class="overflow-hidden">
-                    <div id="carousel" class="carousel flex transition-transform duration-300 ease-in-out">
-                        <!-- Promo 1 -->
-                        <div class="min-w-full px-2">
-                            <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl shadow-lg overflow-hidden">
-                                <div class="flex flex-col md:flex-row">
-                                    <div class="md:w-1/2">
-                                        <img src="/api/placeholder/800/600" alt="Promo Paket Keluarga" class="w-full h-64 md:h-full object-cover">
-                                    </div>
-                                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                                        <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">Promo Spesial</span>
-                                        <h3 class="text-2xl font-bold mb-4">Paket Keluarga Bahagia</h3>
-                                        <p class="text-gray-600 mb-6">Nikmati menu paket keluarga untuk 5 orang dengan harga spesial. Diskon 25% untuk pemesanan di hari Senin-Kamis.</p>
-                                        <div class="flex items-center mb-6">
-                                            <span class="text-3xl font-bold text-primary-dark">Rp499.000</span>
-                                            <span class="ml-3 text-lg text-gray-500 line-through">Rp650.000</span>
-                                        </div>
-                                        <a href="#" class="bg-primary hover:bg-primary-dark text-white text-center px-6 py-3 rounded-lg transition w-full md:w-auto">Pesan Sekarang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Promo 2 -->
-                        <div class="min-w-full px-2">
-                            <div class="bg-gradient-to-r from-green-50 to-teal-50 rounded-2xl shadow-lg overflow-hidden">
-                                <div class="flex flex-col md:flex-row">
-                                    <div class="md:w-1/2">
-                                        <img src="/api/placeholder/800/600" alt="Promo Nasi Kotak" class="w-full h-64 md:h-full object-cover">
-                                    </div>
-                                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                                        <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">Promo Bulanan</span>
-                                        <h3 class="text-2xl font-bold mb-4">Nasi Kotak Hemat</h3>
-                                        <p class="text-gray-600 mb-6">Dapatkan diskon 15% untuk pemesanan nasi kotak minimal 50 box. Cocok untuk acara kantor dan gathering.</p>
-                                        <div class="flex items-center mb-6">
-                                            <span class="text-3xl font-bold text-primary-dark">Rp25.500</span>
-                                            <span class="ml-3 text-lg text-gray-500 line-through">Rp30.000</span>
-                                        </div>
-                                        <a href="#" class="bg-primary hover:bg-primary-dark text-white text-center px-6 py-3 rounded-lg transition w-full md:w-auto">Pesan Sekarang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Promo 3 -->
-                        <div class="min-w-full px-2">
-                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl shadow-lg overflow-hidden">
-                                <div class="flex flex-col md:flex-row">
-                                    <div class="md:w-1/2">
-                                        <img src="/api/placeholder/800/600" alt="Promo Prasmanan" class="w-full h-64 md:h-full object-cover">
-                                    </div>
-                                    <div class="md:w-1/2 p-8 flex flex-col justify-center">
-                                        <span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium inline-block mb-4">Promo Terbatas</span>
-                                        <h3 class="text-2xl font-bold mb-4">Prasmanan Premium</h3>
-                                        <p class="text-gray-600 mb-6">Pemesanan prasmanan untuk 100 orang dapatkan gratis 2 menu tambahan dan 1 stall dessert spesial.</p>
-                                        <div class="flex items-center mb-6">
-                                            <span class="text-3xl font-bold text-primary-dark">Rp65.000</span>
-                                            <span class="ml-3 text-sm text-gray-500">per orang</span>
-                                        </div>
-                                        <a href="#" class="bg-primary hover:bg-primary-dark text-white text-center px-6 py-3 rounded-lg transition w-full md:w-auto">Pesan Sekarang</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carousel Navigation -->
-                <div class="flex justify-center mt-8">
-                    <button onclick="moveCarousel(0)" class="w-3 h-3 rounded-full bg-primary mx-1 carousel-dot"></button>
-                    <button onclick="moveCarousel(1)" class="w-3 h-3 rounded-full bg-gray-300 mx-1 carousel-dot"></button>
-                    <button onclick="moveCarousel(2)" class="w-3 h-3 rounded-full bg-gray-300 mx-1 carousel-dot"></button>
-                </div>
-
-                <!-- Carousel Controls -->
-                <button onclick="prevSlide()" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-md focus:outline-none">
-                    <i class="fas fa-chevron-left text-xl text-primary"></i>
-                </button>
-                <button onclick="nextSlide()" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-md focus:outline-none">
-                    <i class="fas fa-chevron-right text-xl text-primary"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
     <!-- About Section With Statistics -->
-    <section id="about" class="py-16 bg-gray-50">
+    <section id="about" class="py-24 bg-gradient-to-b from-amber-50 to-white">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Mengapa Memilih Dapur Malika?</h2>
-                <p class="max-w-2xl mx-auto text-gray-600">Dapur Malika telah melayani ribuan pelanggan dengan hidangan autentik Indonesia sejak 2015. Kami berkomitmen untuk memberikan pengalaman kuliner terbaik.</p>
+            <div class="text-center mb-16">
+                <span class="text-amber-500 font-medium uppercase tracking-wider">Tentang Kami</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-2 mb-4">Mengapa Memilih Dapur Malika?</h2>
+                <div class="w-24 h-1 bg-amber-400 mx-auto my-4"></div>
+                <p class="max-w-2xl mx-auto text-gray-600 text-lg">Dapur Malika telah melayani ribuan pelanggan dengan hidangan autentik Indonesia sejak 2015. Kami berkomitmen untuk memberikan pengalaman kuliner terbaik.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
-                        <i class="fas fa-utensils text-primary text-2xl"></i>
+                <div class="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition duration-300 hover:scale-105 text-center border border-gray-100">
+                    <div class="inline-flex items-center justify-center w-20 h-20 mb-6 bg-amber-100 rounded-full">
+                        <i class="fas fa-utensils text-amber-500 text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Kualitas Premium</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Kualitas Premium</h3>
                     <p class="text-gray-600">Kami hanya menggunakan bahan-bahan berkualitas tinggi dan segar untuk setiap hidangan yang kami sajikan.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
-                        <i class="fas fa-headset text-primary text-2xl"></i>
+                <div class="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition duration-300 hover:scale-105 text-center border border-gray-100">
+                    <div class="inline-flex items-center justify-center w-20 h-20 mb-6 bg-amber-100 rounded-full">
+                        <i class="fas fa-headset text-amber-500 text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Layanan Responsif</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Layanan Responsif</h3>
                     <p class="text-gray-600">Tim kami siap membantu Anda 24/7 dengan layanan pelanggan yang ramah dan profesional.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 text-center">
-                    <div class="inline-flex items-center justify-center w-16 h-16 mb-6 bg-primary bg-opacity-20 rounded-full">
-                        <i class="fas fa-truck text-primary text-2xl"></i>
+                <div class="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition duration-300 hover:scale-105 text-center border border-gray-100">
+                    <div class="inline-flex items-center justify-center w-20 h-20 mb-6 bg-amber-100 rounded-full">
+                        <i class="fas fa-truck text-amber-500 text-3xl"></i>
                     </div>
-                    <h3 class="text-xl font-semibold mb-4">Pengiriman Tepat Waktu</h3>
+                    <h3 class="text-2xl font-semibold mb-4 text-gray-800">Pengiriman Tepat Waktu</h3>
                     <p class="text-gray-600">Kami menjamin pengiriman pesanan Anda tepat waktu untuk berbagai acara penting Anda.</p>
-                </div>
-            </div>
-
-            <!-- Statistics -->
-            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-primary">100+</div>
-                    <p class="text-gray-600 mt-2">Variasi Menu</p>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-primary">50+</div>
-                    <p class="text-gray-600 mt-2">Acara Besar</p>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- Featured Menu -->
-<section id="menu" class="py-16 bg-white">
-    <div class="max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Menu Favorit Kami</h2>
-            <p class="max-w-2xl mx-auto text-gray-600">Hidangan pilihan chef yang paling diminati pelanggan kami</p>
-        </div>
+    <!-- Featured Menu with Tabs -->
+    <section id="menu" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-amber-500 font-medium uppercase tracking-wider">Menu Spesial</span>
+                <h2 class="text-4xl font-bold text-gray-800 mt-2 mb-4">Menu Favorit Kami</h2>
+                <div class="w-24 h-1 bg-amber-400 mx-auto my-4"></div>
+                <p class="max-w-2xl mx-auto text-gray-600 text-lg">Hidangan pilihan chef yang paling diminati pelanggan kami</p>
+            </div>
 
-        <!-- Tampilkan kategori satu per satu -->
-        @foreach($kategoris as $kategori)
-            @if($kategori->menus->isNotEmpty())
-                <div class="mb-12">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-amber-200">
+            <!-- Kategori Menu Tabs -->
+            <div class="mb-10 flex justify-center">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 border-b-0">
+                    @foreach($kategoris as $index => $kategori)
+                    @if($kategori->menus && $kategori->menus->isNotEmpty())
+                    <button id="tab-{{ $kategori->id }}"
+                        class="kategori-tab {{ $index === 0 ? 'active bg-amber-500 text-white' : 'bg-gray-100 text-gray-700' }} 
+                               px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:bg-amber-500 hover:text-white"
+                        onclick="showKategori('{{ $kategori->id }}')">
                         {{ $kategori->nama }}
-                    </h2>
-                    
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        @foreach($kategori->menus->take(3) as $menu)
-                            <div class="menu-item bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
-                                <!-- Gambar -->
-                                <div class="relative h-56 overflow-hidden">
-                                    <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
-                                        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                                    <span class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded-full shadow">
-                                        {{ $kategori->nama }}
-                                    </span>
-                                </div>
-
-                                <!-- Konten -->
-                                <div class="px-6 py-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h3 class="text-xl font-semibold text-gray-900">{{ $menu->nama }}</h3>
-                                        <span class="text-amber-600 font-semibold">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
-                                    </div>
-                                    <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $menu->deskripsi }}</p>
-
-                                    <a href="{{ route('menu') }}"
-                                        class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2 shadow">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                        </svg>
-                                        Pesan Sekarang
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
+                    </button>
+                    @endif
+                    @endforeach
                 </div>
-            @endif
-        @endforeach
+            </div>
 
-        <div class="text-center mt-10">
-            <a href="{{ route('menu') }}" class="inline-flex items-center text-primary hover:text-primary-dark font-medium">
-                Lihat Semua Menu
-                <i class="fas fa-arrow-right ml-2"></i>
-            </a>
+            <!-- Menu Content -->
+            @foreach($kategoris as $index => $kategori)
+            @if($kategori->menus->isNotEmpty())
+            <div id="kategori-{{ $kategori->id }}" class="kategori-content {{ $index !== 0 ? 'hidden' : '' }}">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    @foreach($kategori->menus->take(6) as $menu)
+                    <div class="menu-item group bg-white rounded-3xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+                        <!-- Gambar dengan overlay hover -->
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
+                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <span class="absolute top-4 left-4 bg-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                {{ $kategori->nama }}
+                            </span>
+                        </div>
+
+                        <!-- Konten -->
+                        <div class="px-6 py-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="text-xl font-bold text-gray-800 group-hover:text-amber-500 transition">{{ $menu->nama }}</h3>
+                                <span class="text-amber-600 font-bold text-lg">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
+                            </div>
+                            <p class="text-gray-600 mb-5 line-clamp-2">{{ $menu->deskripsi }}</p>
+
+                            <a href="{{ route('menu') }}"
+                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 px-4 rounded-xl font-medium transition-all flex items-center justify-center gap-2 shadow-md group-hover:shadow-amber-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                Pesan Sekarang
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                @if($kategori->menus->count() > 6)
+                <div class="text-center mt-10">
+                    <a href="{{ route('menu', ['kategori' => $kategori->id]) }}" class="inline-flex items-center bg-white border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white font-medium px-6 py-3 rounded-full transition duration-300">
+                        Lihat Semua {{ $kategori->nama }}
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                    </a>
+                </div>
+                @endif
+            </div>
+            @endif
+            @endforeach
+
+            <div class="text-center mt-16">
+                <a href="{{ route('menu') }}" class="inline-flex items-center text-white bg-amber-600 hover:bg-amber-700 font-medium px-8 py-4 rounded-full shadow-md hover:shadow-lg transition duration-300">
+                    Lihat Semua Menu Kami
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <!-- JavaScript for Tab Functionality -->
+    <script>
+        function showKategori(kategoriId) {
+            // Hide all kategori content
+            document.querySelectorAll('.kategori-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Show selected kategori content
+            document.getElementById('kategori-' + kategoriId).classList.remove('hidden');
+
+            // Update tab styling
+            document.querySelectorAll('.kategori-tab').forEach(tab => {
+                tab.classList.remove('active', 'bg-amber-500', 'text-white');
+                tab.classList.add('bg-gray-100', 'text-gray-700');
+            });
+
+            document.getElementById('tab-' + kategoriId).classList.add('active', 'bg-amber-500', 'text-white');
+            document.getElementById('tab-' + kategoriId).classList.remove('bg-gray-100', 'text-gray-700');
+        }
+    </script>
 
     <!-- CTA Section -->
     <section class="py-16 bg-gradient-to-r from-primary-dark via-primary to-primary-light text-white">
@@ -441,12 +277,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-6">
-        <p>&copy; 2025 Dapur Malika - All Rights Reserved</p>
-        <p>Jl. Contoh No. 123, Kota Kuliner, Indonesia</p>
-        <p>Email: support@dapurmalika.com | Telp: +62 812 3456 7890</p>
-    </footer>
+    @include('partials.footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 </body>

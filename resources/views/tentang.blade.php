@@ -476,11 +476,8 @@
         </div>
     </section>
 
-<footer class="bg-gray-900 text-white text-center py-6">
-        <p>&copy; 2025 Dapur Malika - All Rights Reserved</p>
-        <p>Jl. Contoh No. 123, Kota Kuliner, Indonesia</p>
-        <p>Email: support@dapurmalika.com | Telp: +62 812 3456 7890</p>
-    </footer>
+    @include('partials.footer')
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 </body>

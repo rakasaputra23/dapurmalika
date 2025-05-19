@@ -115,56 +115,7 @@
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-800">
-    <!-- Navbar -->
-    <nav class="fixed z-50 w-full flex items-center px-6 py-3 bg-white/90 backdrop-blur-md text-gray-800 shadow-sm transition-all duration-300">
-        <div class="w-1/4">
-            <!-- Logo (Left) -->
-            <div class="flex items-center">
-                <div class="relative group">
-                    <img src="/api/placeholder/50/50" alt="Logo" class="w-10 h-10 mr-3 rounded-full shadow-sm group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-dark to-primary-light rounded-full opacity-0 group-hover:opacity-20 transition-all duration-300 -z-10"></div>
-                </div>
-                <div class="text-2xl font-bold bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent hover:tracking-wide transition-all duration-300">Dapur Malika</div>
-            </div>
-        </div>
-
-        <!-- Desktop Menu (Absolute Center) -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
-            <div class="flex items-center">
-                <div class="relative mx-1 group">
-                    <a href="{{ route('home') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('menu') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Menu Catering</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('galeri') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Galeri</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('tentang') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Tentang Kami</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('kontak') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Kontak</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ml-auto md:flex items-center space-x-4">
-            <!-- Admin section removed -->
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden flex items-center">
-            <button onclick="toggleMenu()" class="text-gray-700 p-2">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-    </nav>
+    @include('partials.navbar')
 
     <!-- Mobile Menu -->
     <div id="mobile-menu" class="fixed z-40 hidden bg-white/95 backdrop-blur-md w-full top-16 left-0 shadow-md p-5 md:hidden transition-all duration-300 ease-in-out">
@@ -205,11 +156,30 @@
     <!-- Main Content -->
     <div class="menu-container w-full min-h-screen bg-gradient-to-b from-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-24">
         <div class="max-w-7xl mx-auto">
-            <!-- Header Section -->
-            <div class="text-center mb-16">
-                <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight">Our Gallery</h1>
-                <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Explore the visual journey of our culinary creations and special moments</p>
+            <div class="text-center mb-12 relative">
+            <div class="absolute top-0 left-1/4 -translate-x-1/2 -translate-y-1/2 opacity-10">
+                <i class="fas fa-utensils text-6xl text-amber-500"></i>
             </div>
+            <div class="absolute top-1/4 right-1/4 translate-x-1/2 -translate-y-1/2 opacity-10">
+                <i class="fas fa-mortar-pestle text-6xl text-amber-500"></i>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-500">
+                    Explore Our Menu
+                </span>
+                <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-300 rounded-full"></div>
+            </h1>
+
+            <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+                Indulge in rich flavors and hand-crafted dishes from the heart of Indonesia
+            </p>
+
+            <div class="flex justify-center mt-4">
+                <div class="h-0.5 w-16 bg-amber-300 rounded-full"></div>
+            </div>
+        </div>
+
 
             <!-- Gallery Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 animate__animated animate__fadeInUp">
@@ -267,12 +237,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-6">
-        <p>&copy; 2025 Dapur Malika - All Rights Reserved</p>
-        <p>Jl. Contoh No. 123, Kota Kuliner, Indonesia</p>
-        <p>Email: support@dapurmalika.com | Telp: +62 812 3456 7890</p>
-    </footer>
+    @include('partials.footer')
 
     <script src="https://unpkg.com/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>

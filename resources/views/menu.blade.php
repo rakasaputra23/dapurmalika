@@ -77,317 +77,211 @@
         .menu-item {
             transition: all 0.3s ease;
         }
+
         .menu-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
+
         [x-cloak] {
             display: none !important;
         }
+
         .category-section {
             animation: fadeIn 0.5s ease-out;
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-800">
-    <!-- Navbar -->
-    <nav class="fixed z-50 w-full flex items-center px-6 py-3 bg-white/90 backdrop-blur-md text-gray-800 shadow-sm transition-all duration-300">
-        <div class="w-1/4">
-            <!-- Logo (Left) -->
-            <div class="flex items-center">
-                <div class="relative group">
-                    <img src="/api/placeholder/50/50" alt="Logo" class="w-10 h-10 mr-3 rounded-full shadow-sm group-hover:scale-105 transition-all duration-300">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-primary-dark to-primary-light rounded-full opacity-0 group-hover:opacity-20 transition-all duration-300 -z-10"></div>
-                </div>
-                <div class="text-2xl font-bold bg-gradient-to-r from-primary-dark via-primary to-primary-light bg-clip-text text-transparent hover:tracking-wide transition-all duration-300">Dapur Malika</div>
-            </div>
-        </div>
-
-        <!-- Desktop Menu (Absolute Center) -->
-        <div class="absolute left-1/2 transform -translate-x-1/2 hidden md:block">
-            <div class="flex items-center">
-                <div class="relative mx-1 group">
-                    <a href="{{ route('home') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Beranda</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('menu') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Menu Catering</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('galeri') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Galeri</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('tentang') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Tentang Kami</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-                <div class="relative mx-1 group">
-                    <a href="{{ route('kontak') }}" class="px-4 py-2 font-medium text-gray-700 hover:text-primary transition-all duration-300">Kontak</a>
-                    <div class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transform -translate-x-1/2 group-hover:w-full transition-all duration-300"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="ml-auto md:flex items-center space-x-4">
-            <!-- Admin section removed -->
-        </div>
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden flex items-center">
-            <button onclick="toggleMenu()" class="text-gray-700 p-2">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed z-40 hidden bg-white/95 backdrop-blur-md w-full top-16 left-0 shadow-md p-5 md:hidden transition-all duration-300 ease-in-out">
-        <div class="flex flex-col space-y-2">
-            <a href="{{ route('home') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Beranda
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('menu') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Menu Catering
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('galeri') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Galeri
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('tentang') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Tentang Kami
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('kontak') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Kontak
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-        </div>
-    </div>
+    @include('partials.navbar')
 
     <script src="https://unpkg.com/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
 
     <!-- Main Content -->
     <div class="menu-container w-full min-h-screen bg-gradient-to-b from-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-24">
         <!-- Header Section -->
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Explore Our Menu</h1>
-            <p class="text-lg text-gray-600 mt-4 max-w-2xl mx-auto">Indulge in rich flavors and hand-crafted dishes from the heart of Indonesia</p>
+        <div class="text-center mb-12 relative">
+            <div class="absolute top-0 left-1/4 -translate-x-1/2 -translate-y-1/2 opacity-10">
+                <i class="fas fa-utensils text-6xl text-amber-500"></i>
+            </div>
+            <div class="absolute top-1/4 right-1/4 translate-x-1/2 -translate-y-1/2 opacity-10">
+                <i class="fas fa-mortar-pestle text-6xl text-amber-500"></i>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-500">
+                    Explore Our Menu
+                </span>
+                <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-300 rounded-full"></div>
+            </h1>
+
+            <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+                Indulge in rich flavors and hand-crafted dishes from the heart of Indonesia
+            </p>
+
+            <div class="flex justify-center mt-4">
+                <div class="h-0.5 w-16 bg-amber-300 rounded-full"></div>
+            </div>
         </div>
 
         <!-- Menu Grid with Alpine.js -->
         <div x-data="menuData()" class="container mx-auto">
-            <!-- Category Tabs (for mobile) -->
-            <div class="lg:hidden mb-8">
-                <div class="flex overflow-x-auto pb-2 space-x-2">
-                    @foreach ($kategoris as $kategori)
-                        <button @click="activeCategory = '{{ $kategori->id }}'" 
-                                :class="activeCategory === '{{ $kategori->id }}' ? 'bg-amber-500 text-white' : 'bg-white text-gray-700'"
-                                class="px-4 py-2 rounded-full font-medium text-sm whitespace-nowrap shadow-sm transition-colors">
-                            {{ $kategori->nama }}
-                        </button>
+            <div class="mb-10 flex justify-center">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 border-b-0">
+                    @foreach($kategoris as $index => $kategori)
+                    @if($kategori->menus && $kategori->menus->isNotEmpty())
+                    <button id="tab-{{ $kategori->id }}"
+                        class="kategori-tab {{ $index === 0 ? 'active bg-amber-500 text-white' : 'bg-gray-100 text-gray-700' }} 
+                               px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:bg-amber-500 hover:text-white"
+                        onclick="showKategori('{{ $kategori->id }}')">
+                        {{ $kategori->nama }}
+                    </button>
+                    @endif
                     @endforeach
                 </div>
             </div>
 
             <!-- Desktop Category Layout -->
-            <div class="hidden lg:grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="hidden lg:block">
                 @foreach ($kategoris as $kategori)
-                    <div class="category-section">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6 pb-2 border-b border-amber-200">{{ $kategori->nama }}</h2>
-                        <div class="grid grid-cols-1 gap-6">
-                            @foreach ($kategori->menus as $menu)
-                                <div class="menu-item bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300">
-                                    <!-- Image -->
-                                    <div class="relative h-48 overflow-hidden">
-                                        <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}" 
-                                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                                        @if($menu->is_popular)
-                                            <span class="absolute top-3 right-3 bg-amber-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
-                                                POPULAR
-                                            </span>
-                                        @endif
-                                    </div>
+                <div id="kategori-{{ $kategori->id }}" class="category-section kategori-content {{ $loop->first ? '' : 'hidden' }}">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-amber-800 mb-2 flex items-center">
+                            <span class="mr-2">{{ $kategori->nama }}</span>
+                            <div class="h-px flex-grow bg-gradient-to-r from-amber-300 to-transparent ml-4"></div>
+                        </h2>
+                        <p class="text-gray-600 mb-6">{{ $kategori->deskripsi ?? 'Discover our delicious selection of ' . strtolower($kategori->nama) }}</p>
+                    </div>
 
-                                    <!-- Content -->
-                                    <div class="p-5">
-                                        <div class="flex justify-between items-start mb-2">
-                                            <h3 class="text-lg font-bold text-gray-900">{{ $menu->nama }}</h3>
-                                            <span class="text-amber-600 font-semibold">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
-                                        </div>
-                                        <p class="text-sm text-gray-600 mb-4">{{ $menu->deskripsi }}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                        @foreach ($kategori->menus as $menu)
+                        <div class="menu-item bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg">
+                            <!-- Image -->
+                            <div class="relative h-56 overflow-hidden">
+                                <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
+                                    class="w-full h-full object-cover menu-image">
+                                @if($menu->is_popular)
+                                <div class="popular-badge flex items-center">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span>POPULAR</span>
+                                </div>
+                                @endif
+                            </div>
 
-                                        <button @click="openOrderModal(@js($menu))"
-                                                class="w-full bg-amber-500 hover:bg-amber-600 text-white py-2 px-4 rounded-lg font-medium text-sm transition-all flex items-center justify-center gap-2 shadow">
-                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                            </svg>
-                                            Order via WhatsApp
-                                        </button>
+                            <!-- Content -->
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="text-xl font-bold text-gray-900">{{ $menu->nama }}</h3>
+                                    <div class="price-tag text-sm animate-float">
+                                        Rp{{ number_format($menu->price, 0, ',', '.') }}
                                     </div>
                                 </div>
-                            @endforeach
+                                <p class="text-sm text-gray-600 mb-5 line-clamp-2">{{ $menu->deskripsi }}</p>
+
+                                <button @click="openOrderModal(@js($menu))"
+                                    class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white py-3 px-4 rounded-lg font-medium transition-all flex items-center justify-center gap-2 shadow group">
+
+                                    <!-- WhatsApp SVG Icon -->
+                                    <svg class="w-5 h-5 transform group-hover:rotate-12 transition-transform" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.003 2.933c-7.286 0-13.07 5.785-13.07 12.93 0 2.282.624 4.507 1.807 6.462L2 30l7.846-2.733a13.014 13.014 0 006.157 1.563h.003c7.285 0 13.07-5.784 13.07-12.93s-5.785-12.93-13.07-12.93zm0 23.793h-.003a11.027 11.027 0 01-5.626-1.536l-.403-.238-4.653 1.623 1.59-4.51-.263-.416a10.863 10.863 0 01-1.714-5.898c0-6.016 4.905-10.918 10.931-10.918 2.922 0 5.667 1.137 7.735 3.203a10.823 10.823 0 013.2 7.727c0 6.015-4.904 10.919-10.928 10.919zm6.016-8.206c-.328-.164-1.94-.957-2.241-1.066-.301-.111-.52-.164-.738.164s-.85 1.066-1.043 1.285c-.194.219-.388.246-.716.082-.328-.165-1.38-.508-2.63-1.617-.972-.866-1.63-1.937-1.822-2.265-.194-.328-.021-.506.145-.67.149-.148.328-.388.492-.582.165-.194.219-.328.328-.547.109-.219.055-.41-.027-.582-.082-.164-.738-1.78-1.01-2.437-.266-.637-.535-.55-.738-.56l-.63-.012c-.22 0-.574.082-.875.41-.301.328-1.148 1.121-1.148 2.734s1.176 3.169 1.339 3.387c.164.219 2.314 3.538 5.61 4.96.785.339 1.397.542 1.875.692.787.25 1.502.214 2.068.13.63-.094 1.94-.793 2.214-1.561.273-.769.273-1.43.191-1.561-.082-.13-.301-.21-.63-.374z" />
+                                    </svg>
+
+                                    <span>Order via WhatsApp</span>
+                                </button>
+                            </div>
                         </div>
+                        @endforeach
                     </div>
+                </div>
                 @endforeach
             </div>
 
             <!-- Mobile Category Layout -->
             <div class="lg:hidden space-y-8">
                 @foreach ($kategoris as $kategori)
-                    <div x-show="activeCategory === '{{ $kategori->id }}'" class="category-section">
-                        <h2 class="text-xl font-bold text-gray-800 mb-4">{{ $kategori->nama }}</h2>
-                        <div class="grid grid-cols-1 gap-4">
-                            @foreach ($kategori->menus as $menu)
-                                <div class="menu-item bg-white rounded-lg shadow overflow-hidden">
-                                    <div class="flex">
-                                        <div class="relative w-1/3">
-                                            <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
-                                                class="w-full h-full object-cover">
-                                            @if($menu->is_popular)
-                                                <span class="absolute top-1 right-1 bg-amber-600 text-white text-xxs font-bold px-1 py-0.5 rounded">
-                                                    POPULAR
-                                                </span>
-                                            @endif
-                                        </div>
-                                        <div class="w-2/3 p-3">
-                                            <div class="flex justify-between items-start">
-                                                <h3 class="text-md font-bold text-gray-900">{{ $menu->nama }}</h3>
-                                                <span class="text-amber-600 font-semibold text-sm">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
-                                            </div>
-                                            <p class="text-xs text-gray-600 mb-2 line-clamp-2">{{ $menu->deskripsi }}</p>
-                                            <button @click="openOrderModal(@js($menu))"
-                                                    class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 px-2 rounded text-xs flex items-center justify-center gap-1">
-                                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                                </svg>
-                                                Order
-                                            </button>
-                                        </div>
-                                    </div>
+                <div x-show="activeCategory === '{{ $kategori->id }}'" class="category-section">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">{{ $kategori->nama }}</h2>
+                    <div class="grid grid-cols-1 gap-4">
+                        @foreach ($kategori->menus as $menu)
+                        <div class="menu-item bg-white rounded-lg shadow overflow-hidden">
+                            <div class="flex">
+                                <div class="relative w-1/3">
+                                    <img src="{{ Storage::url($menu->foto) }}" alt="{{ $menu->nama }}"
+                                        class="w-full h-full object-cover">
+                                    @if($menu->is_popular)
+                                    <span class="absolute top-1 right-1 bg-amber-600 text-white text-xxs font-bold px-1 py-0.5 rounded">
+                                        POPULAR
+                                    </span>
+                                    @endif
                                 </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Order Modal -->
-            <div x-show="orderModalOpen" x-cloak class="fixed inset-0 z-50 overflow-y-auto">
-                <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                    <!-- Background overlay -->
-                    <div x-show="orderModalOpen" 
-                        x-transition:enter="ease-out duration-300"
-                        x-transition:enter-start="opacity-0"
-                        x-transition:enter-end="opacity-100"
-                        x-transition:leave="ease-in duration-200"
-                        x-transition:leave-start="opacity-100"
-                        x-transition:leave-end="opacity-0"
-                        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
-                    <!-- Modal content -->
-                    <div x-show="orderModalOpen"
-                        x-transition:enter="ease-out duration-300"
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                        x-transition:leave="ease-in duration-200"
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                        
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
-                                Order <span x-text="currentMenu.nama"></span>
-                            </h3>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                                    <input x-model="customerName" type="text" 
-                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
-                                    <div class="flex items-center">
-                                        <button @click="quantity > 1 ? quantity-- : quantity"
-                                                class="px-3 py-1 bg-gray-100 border border-gray-300 rounded-l-md">
-                                            -
-                                        </button>
-                                        <input x-model="quantity" type="number" min="1" readonly
-                                            class="w-16 px-3 py-1 text-center border-t border-b border-gray-300">
-                                        <button @click="quantity++"
-                                                class="px-3 py-1 bg-gray-100 border border-gray-300 rounded-r-md">
-                                            +
-                                        </button>
+                                <div class="w-2/3 p-3">
+                                    <div class="flex justify-between items-start">
+                                        <h3 class="text-md font-bold text-gray-900">{{ $menu->nama }}</h3>
+                                        <span class="text-amber-600 font-semibold text-sm">Rp{{ number_format($menu->price, 0, ',', '.') }}</span>
                                     </div>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Special Notes</label>
-                                    <textarea x-model="specialNotes" rows="3"
-                                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500"></textarea>
-                                </div>
-                                
-                                <div class="bg-gray-50 p-3 rounded-md">
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span class="text-gray-500">Price:</span>
-                                        <span class="text-gray-900">Rp<span x-text="formatPrice(currentMenu.price)"></span></span>
-                                    </div>
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span class="text-gray-500">Quantity:</span>
-                                        <span class="text-gray-900" x-text="quantity"></span>
-                                    </div>
-                                    <div class="border-t border-gray-200 mt-2 pt-2 flex justify-between">
-                                        <span class="font-medium text-gray-900">Total:</span>
-                                        <span class="font-medium text-amber-600">Rp<span x-text="formatPrice(quantity * currentMenu.price)"></span></span>
-                                    </div>
+                                    <p class="text-xs text-gray-600 mb-2 line-clamp-2">{{ $menu->deskripsi }}</p>
+                                    <button @click="openOrderModal(@js($menu))"
+                                        class="w-full bg-amber-500 hover:bg-amber-600 text-white py-1 px-2 rounded text-xs flex items-center justify-center gap-1">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        Order
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <a :href="generateWhatsAppLink()" target="_blank"
-                            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-amber-600 text-base font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 sm:ml-3 sm:w-auto sm:text-sm">
-                                Order via WhatsApp
-                            </a>
-                            <button @click="orderModalOpen = false" type="button"
-                                    class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                Cancel
-                            </button>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
+                @endforeach
             </div>
+
+            @include('partials.modal')
         </div>
     </div>
 
-    <footer class="bg-gray-900 text-white text-center py-6">
-        <p>&copy; 2025 Dapur Malika - All Rights Reserved</p>
-        <p>Jl. Contoh No. 123, Kota Kuliner, Indonesia</p>
-        <p>Email: support@dapurmalika.com | Telp: +62 812 3456 7890</p>
-    </footer>
+    @include('partials.footer')
 
     <script>
+        function showKategori(kategoriId) {
+            // Sembunyikan semua kategori content
+            document.querySelectorAll('.kategori-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Tampilkan kategori yang dipilih
+            const target = document.getElementById('kategori-' + kategoriId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update tampilan tab aktif
+            document.querySelectorAll('.kategori-tab').forEach(tab => {
+                tab.classList.remove('active', 'bg-amber-500', 'text-white');
+                tab.classList.add('bg-gray-100', 'text-gray-700');
+            });
+
+            const activeTab = document.getElementById('tab-' + kategoriId);
+            if (activeTab) {
+                activeTab.classList.add('active', 'bg-amber-500', 'text-white');
+                activeTab.classList.remove('bg-gray-100', 'text-gray-700');
+            }
+        }
+
         function menuData() {
             return {
                 activeCategory: '{{ $kategoris->first()->id }}',
@@ -396,7 +290,7 @@
                 quantity: 1,
                 customerName: '',
                 specialNotes: '',
-                
+
                 openOrderModal(menu) {
                     this.currentMenu = menu;
                     this.quantity = 1;
@@ -404,11 +298,11 @@
                     this.specialNotes = '';
                     this.orderModalOpen = true;
                 },
-                
+
                 generateWhatsAppLink() {
                     const menu = this.currentMenu;
                     const total = this.quantity * menu.price;
-                    
+
                     const message = `Halo Dapur Malika, saya ${this.customerName || 'Pelanggan'} ingin memesan:
                     
     📋 *Detail Pesanan:*
@@ -421,10 +315,10 @@
     ${this.specialNotes || '-'}
 
     Terima kasih!`;
-                    
+
                     return `https://wa.me/6285781192748?text=${encodeURIComponent(message)}`;
                 },
-                
+
                 formatPrice(price) {
                     return new Intl.NumberFormat('id-ID').format(price);
                 }
@@ -433,4 +327,5 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 </body>
+
 </html>

@@ -36,12 +36,4 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- Mobile Menu Button -->
-        <div class="md:hidden flex items-center">
-            <button onclick="toggleMenu()" class="text-gray-700 p-2">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </div>
     </nav>
