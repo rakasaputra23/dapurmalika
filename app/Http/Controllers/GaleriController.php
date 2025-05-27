@@ -3,80 +3,118 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeri;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class GaleriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Method untuk halaman galeri publik
+    public function galeriPublik()
+{
+    $kategoris = Kategori::with('galeri')->get();
+    $galeri = Galeri::paginate(12); // or whatever number you prefer
+    
+    return view('galeri', compact('kategoris', 'galeri'));
+}
+
+    // Method untuk halaman admin
     public function index()
     {
-        $galeri = Galeri::all();
-        return view('admin.galeri.index', compact('galeri'));
+        // Mengambil semua kategori
+        $kategoris = Kategori::all();
+        
+        // Mengambil semua item galeri dengan pagination
+        $galeri = Galeri::paginate(10);
+
+        return view('admin.galeri.index', compact('kategoris', 'galeri'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    public function create()
+    {
+        $kategoris = Kategori::all();
+        return view('admin.galeri.create', compact('kategoris'));
+    }
+
     public function store(Request $request)
     {
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        // Validasi input
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $data = $request->only(['judul']);
-        
+        // Menyimpan data galeri baru
+        $galeri = new Galeri();
+        $galeri->nama = $validated['nama'];
+        $galeri->kategori_id = $validated['kategori_id'];
+
+        // Menyimpan foto
         if ($request->hasFile('foto')) {
-            $data['foto'] = $request->file('foto')->store('galeri', 'public');
+            $foto = $request->file('foto');
+            $path = $foto->store('galeri_images', 'public');
+            $galeri->foto = $path;
         }
 
-        Galeri::create($data);
+        $galeri->save();
 
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil ditambahkan!');
+        return redirect()->route('galeri.index')->with('success', 'Item galeri berhasil ditambahkan.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Galeri $galeri)
+    public function edit($id)
     {
-        $request->validate([
-            'judul' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        $galeri = Galeri::findOrFail($id);
+        $kategoris = Kategori::all();
+        return view('admin.galeri.edit', compact('galeri', 'kategoris'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validasi input
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategoris,id',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
-        $data = $request->only(['judul']);
+        // Mengambil data galeri
+        $galeri = Galeri::findOrFail($id);
+        $galeri->nama = $validated['nama'];
+        $galeri->kategori_id = $validated['kategori_id'];
 
-        if ($request->hasFile('foto')) {
-            // Hapus foto lama jika ada
-            if ($galeri->foto && Storage::disk('public')->exists($galeri->foto)) {
+        // Jika checkbox hapus foto dicentang
+        if ($request->has('hapus_foto') && $galeri->foto) {
+            Storage::disk('public')->delete($galeri->foto);
+            $galeri->foto = null;
+        }
+        // Menghapus foto lama jika ada dan menyimpan foto baru
+        elseif ($request->hasFile('foto')) {
+            if ($galeri->foto) {
                 Storage::disk('public')->delete($galeri->foto);
             }
-            
-            // Simpan foto baru
-            $data['foto'] = $request->file('foto')->store('galeri', 'public');
+
+            $foto = $request->file('foto');
+            $path = $foto->store('galeri_images', 'public');
+            $galeri->foto = $path;
         }
 
-        $galeri->update($data);
+        $galeri->save();
 
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil diperbarui!');
+        return redirect()->route('galeri.index')->with('success', 'Item galeri berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Galeri $galeri)
+    public function destroy($id)
     {
-        // Hapus foto dari storage
-        if ($galeri->foto && Storage::disk('public')->exists($galeri->foto)) {
+        $galeri = Galeri::findOrFail($id);
+        
+        // Menghapus foto jika ada
+        if ($galeri->foto) {
             Storage::disk('public')->delete($galeri->foto);
         }
 
         $galeri->delete();
 
-        return redirect()->route('galeri.index')->with('success', 'Foto berhasil dihapus!');
+        return redirect()->route('galeri.index')->with('success', 'Item galeri berhasil dihapus!');
     }
 }

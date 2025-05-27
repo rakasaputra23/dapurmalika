@@ -18,4 +18,10 @@ class Kategori extends Model
     {
         return $this->hasMany(Menu::class);
     }
+
+    // Tambahkan relasi dengan galeri
+    public function galeri()
+    {
+        return $this->hasMany(Galeri::class);
+    }
 }

@@ -138,7 +138,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Alamat</h3>
-                                <p class="text-gray-600 mt-1">Jl. Contoh No. 123, Kota Kuliner, Indonesia</p>
+                                <p class="text-gray-600 mt-1">Perum. Gebang Raya Blok AL-17, Kota Sidoarjo, Indonesia</p>
                             </div>
                         </div>
                         
@@ -148,7 +148,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Telepon</h3>
-                                <p class="text-gray-600 mt-1">+62 812 3456 7890</p>
+                                <p class="text-gray-600 mt-1">+62 813 8298 6746</p>
                             </div>
                         </div>
                         
@@ -158,7 +158,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Email</h3>
-                                <p class="text-gray-600 mt-1">support@dapurmalika.com</p>
+                                <p class="text-gray-600 mt-1">kurniawatiyuni631@gmail.com</p>
                             </div>
                         </div>
                         

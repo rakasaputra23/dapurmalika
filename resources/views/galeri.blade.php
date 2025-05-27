@@ -1,4 +1,3 @@
-<!-- resources/views/galeri.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,21 +30,13 @@
                 }
             }
         }
-
-        function toggleMenu() {
-            document.getElementById("mobile-menu").classList.toggle("hidden");
-        }
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -59,57 +50,72 @@
             }
         }
 
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in-out;
-        }
+        .animate-fade-in { animation: fadeIn 1s ease-in-out; }
+        .animate-fade-in-delayed { animation: fadeIn 1.5s ease-in-out; }
+        .animate-slide-up { animation: slideUp 0.8s ease-in-out; }
 
-        .animate-fade-in-delayed {
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .animate-slide-up {
-            animation: slideUp 0.8s ease-in-out;
-        }
-
-        /* Gallery specific styles */
-        .galeri-item {
+        /* Gallery item styles */
+        .gallery-item {
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
-        .galeri-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-        [x-cloak] {
-            display: none !important;
+
+        .gallery-item img {
+            transition: transform 0.5s ease;
         }
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
         }
-        .pagination li {
-            margin: 0 4px;
-        }
-        .pagination li a,
-        .pagination li span {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 4px;
-            border: 1px solid #e5e7eb;
-            color: #4b5563;
-            transition: all 0.3s;
-        }
-        .pagination li a:hover {
-            background-color: #f3f4f6;
-        }
-        .pagination li.active span {
-            background-color: #d97706;
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
             color: white;
-            border-color: #d97706;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .pagination li.disabled span {
-            opacity: 0.5;
-            pointer-events: none;
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(251, 146, 60, 0.9);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        /* Grid layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -117,62 +123,26 @@
 <body class="font-sans bg-gray-50 text-gray-800">
     @include('partials.navbar')
 
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed z-40 hidden bg-white/95 backdrop-blur-md w-full top-16 left-0 shadow-md p-5 md:hidden transition-all duration-300 ease-in-out">
-        <div class="flex flex-col space-y-2">
-            <a href="{{ route('home') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Beranda
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('menu') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Menu Catering
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('galeri') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Galeri
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('tentang') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Tentang Kami
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-            <a href="{{ route('kontak') }}" class="py-3 px-4 hover:bg-gray-50 rounded-lg font-medium text-gray-700 hover:text-primary transition-all duration-300 flex items-center">
-                <span class="relative">
-                    Kontak
-                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-                </span>
-            </a>
-        </div>
-    </div>
-
     <!-- Main Content -->
-    <div class="menu-container w-full min-h-screen bg-gradient-to-b from-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-24">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12 relative">
+    <div class="w-full min-h-screen bg-gradient-to-b from-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8 pt-24">
+        <!-- Header Section -->
+        <div class="text-center mb-12 relative">
             <div class="absolute top-0 left-1/4 -translate-x-1/2 -translate-y-1/2 opacity-10">
-                <i class="fas fa-utensils text-6xl text-amber-500"></i>
+                <i class="fas fa-camera text-6xl text-amber-500"></i>
             </div>
             <div class="absolute top-1/4 right-1/4 translate-x-1/2 -translate-y-1/2 opacity-10">
-                <i class="fas fa-mortar-pestle text-6xl text-amber-500"></i>
+                <i class="fas fa-images text-6xl text-amber-500"></i>
             </div>
 
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight relative inline-block">
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-500">
-                    Explore Our Menu
+                    Galeri Dapur Malika
                 </span>
                 <div class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-amber-600 to-amber-300 rounded-full"></div>
             </h1>
 
             <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
-                Indulge in rich flavors and hand-crafted dishes from the heart of Indonesia
+                Jelajahi momen-momen indah dan hidangan istimewa kami
             </p>
 
             <div class="flex justify-center mt-4">
@@ -180,49 +150,49 @@
             </div>
         </div>
 
+        <!-- Gallery Content -->
+        <div class="container mx-auto">
+            <!-- Category Filter -->
+            <div class="mb-10 flex justify-center">
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4">
+                    <button class="filter-btn active bg-amber-500 text-white px-6 py-3 rounded-full text-sm font-medium transition-all duration-300"
+                        data-filter="all">
+                        Semua
+                    </button>
+                    @foreach($kategoris as $kategori)
+                    <button class="filter-btn bg-gray-100 text-gray-700 px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 hover:bg-amber-500 hover:text-white"
+                        data-filter="kategori-{{ $kategori->id }}">
+                        {{ $kategori->nama }}
+                    </button>
+                    @endforeach
+                </div>
+            </div>
 
             <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 animate__animated animate__fadeInUp">
-                @foreach ($galeri as $item)
-                <div x-data="{ showModal: false }" class="galeri-item bg-white/80 backdrop-blur-md rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <!-- Image -->
-                    <div class="relative h-64 overflow-hidden cursor-pointer" @click="showModal = true">
-                        <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
-                    </div>
-
-                    <!-- Caption -->
-                    <div class="p-4">
-                        <h3 class="text-lg font-bold text-gray-900 text-center">{{ $item->judul }}</h3>
-                    </div>
-
-                    <!-- Modal for larger image view -->
-                    <div x-show="showModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/80" 
-                         @click.self="showModal = false"
-                         x-transition:enter="ease-out duration-300"
-                         x-transition:enter-start="opacity-0"
-                         x-transition:enter-end="opacity-100"
-                         x-transition:leave="ease-in duration-200"
-                         x-transition:leave-start="opacity-100"
-                         x-transition:leave-end="opacity-0">
-
-                        <div class="relative bg-white p-1 rounded-lg max-w-4xl max-h-screen overflow-hidden"
-                             x-transition:enter="ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100">
-
-                            <!-- Close button -->
-                            <button @click="showModal = false" class="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-1 z-10 hover:bg-gray-900 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-
-                            <!-- Lightbox image -->
-                            <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->judul }}" class="max-h-[80vh] max-w-full mx-auto object-contain">
+            <div class="gallery-grid">
+                @foreach($galeri as $item)
+                <div class="filter-item kategori-{{ $item->kategori_id ?? 'none' }} animate-fade-in" 
+                     style="animation-delay: {{ $loop->index * 0.1 }}s">
+                    <div class="gallery-item h-full bg-white rounded-xl shadow-md overflow-hidden relative">
+                        <!-- Image -->
+                        <div class="relative h-64 w-full overflow-hidden">
+                            <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->nama }}"
+                                class="w-full h-full object-cover">
                             
-                            <!-- Caption in modal -->
-                            <div class="p-3 bg-white">
-                                <h3 class="text-xl font-bold text-gray-900 text-center">{{ $item->judul }}</h3>
+                            @if($item->kategori)
+                            <div class="category-badge">
+                                {{ $item->kategori->nama }}
+                            </div>
+                            @endif
+                        </div>
+
+                        <!-- Overlay Content -->
+                        <div class="gallery-overlay">
+                            <h3 class="text-xl font-bold mb-1">{{ $item->nama }}</h3>
+                            <p class="text-sm opacity-90">{{ $item->created_at->format('d M Y') }}</p>
+                            <div class="flex items-center mt-2">
+                                <i class="fas fa-heart mr-1 text-amber-300"></i>
+                                <span class="text-xs">{{ rand(10, 100) }} Likes</span>
                             </div>
                         </div>
                     </div>
@@ -230,16 +200,83 @@
                 @endforeach
             </div>
 
-            <!-- Pagination Links -->
+            <!-- Pagination -->
+            @if($galeri->hasPages())
             <div class="mt-12 flex justify-center">
-                {{ $galeri->links() }}
+                <div class="flex items-center gap-2">
+                    @if($galeri->onFirstPage())
+                    <span class="px-4 py-2 rounded-full bg-gray-100 text-gray-400 cursor-not-allowed">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    @else
+                    <a href="{{ $galeri->previousPageUrl() }}" class="px-4 py-2 rounded-full bg-amber-500 text-white hover:bg-amber-600 transition-colors">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    @endif
+
+                    @foreach(range(1, $galeri->lastPage()) as $page)
+                    <a href="{{ $galeri->url($page) }}" 
+                       class="px-4 py-2 rounded-full {{ $galeri->currentPage() === $page ? 'bg-amber-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-amber-500 hover:text-white' }} transition-colors">
+                        {{ $page }}
+                    </a>
+                    @endforeach
+
+                    @if($galeri->hasMorePages())
+                    <a href="{{ $galeri->nextPageUrl() }}" class="px-4 py-2 rounded-full bg-amber-500 text-white hover:bg-amber-600 transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                    @else
+                    <span class="px-4 py-2 rounded-full bg-gray-100 text-gray-400 cursor-not-allowed">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                    @endif
+                </div>
             </div>
+            @endif
         </div>
     </div>
 
     @include('partials.footer')
 
-    <script src="https://unpkg.com/alpinejs@3.13.0/dist/cdn.min.js" defer></script>
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Update active button
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-amber-500', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-amber-500', 'text-white');
+                this.classList.remove('bg-gray-100', 'text-gray-700');
+
+                // Filter items
+                const filter = this.dataset.filter;
+                document.querySelectorAll('.filter-item').forEach(item => {
+                    if (filter === 'all' || item.classList.contains(filter)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Add hover effect to gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.querySelector('img').style.transform = 'scale(1.05)';
+                this.querySelector('.gallery-overlay').style.opacity = '1';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.querySelector('img').style.transform = 'scale(1)';
+                this.querySelector('.gallery-overlay').style.opacity = '0';
+            });
+        });
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js" defer></script>
 </body>
+
 </html>

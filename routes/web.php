@@ -24,9 +24,7 @@ Route::get('/home', function () {
 Route::get('/menu', [MenuController::class, 'menuPublik'])->name('menu');
 Route::get('/kontak', [PublicPageController::class, 'kontak'])->name('kontak');
 Route::get('/tentang', [PublicPageController::class, 'tentang'])->name('tentang');
-
-// Galeri Halaman Publik
-Route::get('/galeri', [GaleriPageController::class, 'index'])->name('galeri');
+Route::get('/galeri', [GaleriController::class, 'galeriPublik'])->name('galeri');
 
 // Route untuk admin menu management
 Route::prefix('admin')->middleware(['auth'])->group(function () {
@@ -61,11 +59,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('menus', MenuController::class)->except(['edit', 'show']);
     
         // Galeri Management
-        Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri.index');
-        Route::post('/galeri', [GaleriController::class, 'store'])->name('galeri.store');
-        Route::put('/galeri/{galeri}', [GaleriController::class, 'update'])->name('galeri.update');
-        Route::delete('/galeri/{galeri}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
+        Route::resource('galeri', GaleriController::class);
     });
+
 
     Route::post('/kontak', [KontakController::class, 'store'])->name('kontak.store');
 });
