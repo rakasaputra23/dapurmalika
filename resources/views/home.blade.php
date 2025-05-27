@@ -94,7 +94,7 @@
             <h1 class="text-5xl md:text-7xl font-bold animate-fade-in leading-tight">Dapur <span class="text-amber-400">Malika</span></h1>
             <p class="mt-6 text-lg md:text-xl animate-fade-in-delayed max-w-2xl opacity-90">Dapur Malika menyajikan hidangan Indonesia autentik dengan bahan-bahan premium untuk setiap acara spesial Anda</p>
             <div class="mt-10 flex flex-col sm:flex-row justify-center gap-5 animate-slide-up">
-                <a href="#" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium transition duration-300 shadow-lg hover:shadow-amber-500/30">
+                <a href="https://wa.me/6281359161718" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-medium transition duration-300 shadow-lg hover:shadow-amber-500/30">
                     Pesan Sekarang
                 </a>
                 <a href="#menu" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-full font-medium transition duration-300">
@@ -342,7 +342,7 @@
             <h2 class="text-3xl font-bold mb-6">Siap untuk Memesan?</h2>
             <p class="text-lg mb-8">Hubungi kami sekarang untuk mendapatkan penawaran terbaik untuk acara spesial Anda</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-full font-medium transition">
+                <a href="https://wa.me/6281359161718" target="_blank" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-full font-medium transition">
                     <i class="fab fa-whatsapp mr-2"></i> WhatsApp
                 </a>
                 <a href="{{ route('menu') }}" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white px-8 py-3 rounded-full font-medium transition">

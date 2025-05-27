@@ -183,9 +183,9 @@
                             <a href="#" class="bg-primary bg-opacity-20 hover:bg-opacity-30 text-primary rounded-full w-10 h-10 flex items-center justify-center transition">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="bg-primary bg-opacity-20 hover:bg-opacity-30 text-primary rounded-full w-10 h-10 flex items-center justify-center transition">
+                            <a href="https://wa.me/6281359161718" target="_blank" class="bg-primary bg-opacity-20 hover:bg-opacity-30 text-primary rounded-full w-10 h-10 flex items-center justify-center transition">
                                 <i class="fab fa-whatsapp"></i>
-                            </a>
+                            </a> 
                             <a href="#" class="bg-primary bg-opacity-20 hover:bg-opacity-30 text-primary rounded-full w-10 h-10 flex items-center justify-center transition">
                                 <i class="fab fa-tiktok"></i>
                             </a>
@@ -236,7 +236,7 @@
         <div class="text-center mb-10">
             <h2 class="text-3xl font-bold text-gray-800">Lokasi Kami</h2>
             <div class="w-20 h-1 bg-amber-500 mx-auto my-4"></div>
-            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Kunjungi kami di Jl. Raya Ciputat No.12, Pondok Pinang, Jakarta Selatan</p>
+            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Kunjungi kami di Perum. Gebang Raya Blok AL-17, Gebang, Sidoarjo</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             <!-- Google Maps Embed -->
@@ -278,11 +278,11 @@
                         </li>
                         <li class="flex items-center">
                             <i class="fab fa-whatsapp text-amber-500 mr-3"></i>
-                            0812-3456-7890
+                            0813-8298-6746
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope text-amber-500 mr-3"></i>
-                            info@dapurmalika.com
+                            kurniawatiyuni631@gmail.com
                         </li>
                     </ul>
                 </div>
@@ -333,9 +333,10 @@
             <h2 class="text-3xl font-bold mb-6">Siap untuk Memesan?</h2>
             <p class="text-lg mb-8">Hubungi kami sekarang untuk mendapatkan penawaran terbaik untuk acara spesial Anda</p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-full font-medium transition">
+                <a href="https://wa.me/6281359161718" target="_blank" class="bg-white text-primary hover:bg-gray-100 px-8 py-3 rounded-full font-medium transition">
                     <i class="fab fa-whatsapp mr-2"></i> WhatsApp
                 </a>
+
                 <a href="{{ route('menu') }}" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white px-8 py-3 rounded-full font-medium transition">
                     Katalog Menu
                 </a>
