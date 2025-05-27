@@ -239,6 +239,81 @@
         </div>
     </section>
 
+<!-- Gallery Preview Section - Carousel Style -->
+<section class="py-20 bg-amber-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-amber-500 font-medium uppercase tracking-wider">Galeri Kami</span>
+            <h2 class="text-4xl font-bold text-gray-800 mt-2 mb-4">Kisah Dapur Malika</h2>
+            <div class="w-24 h-1 bg-amber-400 mx-auto my-4"></div>
+            <p class="max-w-2xl mx-auto text-gray-600 text-lg">Potret kehangatan dan kelezatan dalam setiap sajian kami</p>
+        </div>
+
+        <!-- Interactive Carousel -->
+        <div class="relative group">
+            <div class="carousel-container flex space-x-6 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory">
+                @foreach($galeri as $item)
+                <div class="carousel-item flex-shrink-0 w-72 snap-center transform transition-all duration-300 group-hover:scale-95 hover:!scale-100">
+                    <div class="relative h-80 rounded-2xl overflow-hidden shadow-lg border-2 border-white hover:border-amber-300 transition-all duration-300">
+                        <img src="{{ Storage::url($item->foto) }}" alt="{{ $item->nama }}" 
+                             class="w-full h-full object-cover absolute inset-0 transform hover:scale-105 transition duration-500">
+                        
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div class="translate-y-4 hover:translate-y-0 transition-transform duration-300">
+                                <h3 class="text-white font-bold text-lg">{{ $item->nama }}</h3>
+                                @if($item->kategori)
+                                <span class="inline-block mt-1 text-xs bg-amber-500 text-white px-2 py-1 rounded-full">
+                                    {{ $item->kategori->nama }}
+                                </span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <!-- Navigation Arrows -->
+            <button class="carousel-nav absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white p-3 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-amber-100 z-10">
+                <i class="fas fa-chevron-left text-amber-600"></i>
+            </button>
+            <button class="carousel-nav absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white p-3 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-amber-100 z-10">
+                <i class="fas fa-chevron-right text-amber-600"></i>
+            </button>
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="{{ route('galeri') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-amber-600 hover:bg-amber-700 transition-all duration-300 hover:shadow-lg">
+                Jelajahi Lebih Banyak
+                <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    .carousel-container::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+<script>
+    // Simple carousel navigation
+    document.querySelectorAll('.carousel-nav').forEach(button => {
+        button.addEventListener('click', function() {
+            const container = document.querySelector('.carousel-container');
+            const direction = this.querySelector('i').classList.contains('fa-chevron-left') ? -1 : 1;
+            container.scrollBy({ left: 300 * direction, behavior: 'smooth' });
+        });
+    });
+</script>
+
     <!-- JavaScript for Tab Functionality -->
     <script>
         function showKategori(kategoriId) {

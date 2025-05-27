@@ -1,5 +1,5 @@
 <?php
-
+// 1. AdminPasswordResetController.php
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

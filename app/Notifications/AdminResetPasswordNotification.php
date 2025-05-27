@@ -34,20 +34,21 @@ class AdminResetPasswordNotification extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(object $notifiable): MailMessage
-    {
-        $url = url(route('admin.password.reset', [
-            'token' => $this->token,
-            'email' => $notifiable->getEmailForPasswordReset(),
-        ], false));
+    public function toMail($notifiable)
+{
+    $url = url(route('admin.password.reset', [
+        'token' => $this->token,
+        'email' => $notifiable->getEmailForPasswordReset(),
+    ], false));
 
-        return (new MailMessage)
-                    ->subject('Reset Password - Dapur Malika Admin')
-                    ->line('Anda menerima email ini karena kami menerima permintaan reset password untuk akun admin Anda.')
-                    ->action('Reset Password', $url)
-                    ->line('Link reset password ini akan kedaluwarsa dalam 60 menit.')
-                    ->line('Jika Anda tidak meminta reset password, tidak ada tindakan lebih lanjut yang diperlukan.');
-    }
+    return (new MailMessage)
+        ->subject('Reset Password - Dapur Malika')
+        ->view('emails.password-reset', [
+            'url' => $url,
+            'count' => config('auth.passwords.admins.expire', 60),
+            'email' => $notifiable->email
+        ]);
+}
 
     /**
      * Get the array representation of the notification.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Menu;
+use App\Models\Galeri; // Tambahkan ini
 
 class HomeController extends Controller
 {
@@ -26,7 +27,13 @@ class HomeController extends Controller
             $query->where('nama', 'Jajanan');
         })->latest()->first();
 
-        // Mengirim data kategori dan menu ke view
-        return view('home', compact('kategoris', 'makanan', 'catering', 'jajanan'));
+        // Ambil data galeri terbaru (8 item)
+        $galeri = Galeri::with('kategori')
+                    ->latest()
+                    ->take(8)
+                    ->get();
+
+        // Mengirim semua data ke view
+        return view('home', compact('kategoris', 'makanan', 'catering', 'jajanan', 'galeri'));
     }
 }

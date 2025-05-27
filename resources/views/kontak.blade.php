@@ -232,19 +232,64 @@
 
     <!-- Map Section -->
     <section class="py-16 bg-gray-100">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold">Lokasi Kami</h2>
-                <p class="text-gray-600 mt-2">Kunjungi kami di lokasi berikut</p>
-            </div>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <!-- Placeholder for the map -->
-                <div class="w-full h-96 bg-gray-300 flex items-center justify-center">
-                    <span class="text-gray-600">Google Maps akan ditampilkan di sini</span>
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-800">Lokasi Kami</h2>
+            <div class="w-20 h-1 bg-amber-500 mx-auto my-4"></div>
+            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Kunjungi kami di Jl. Raya Ciputat No.12, Pondok Pinang, Jakarta Selatan</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+            <!-- Google Maps Embed -->
+            <div class="w-full h-96 rounded-xl overflow-hidden">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3955.9632744243395!2d112.72489507580649!3d-7.469307654378552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMjgnMDkuNSJTIDExMsKwNDMnNDcuMiJF!5e0!3m2!1sid!2sid!4v1748345708690!5m2!1sid!2sid" 
+    width="100%" 
+    height="100%" 
+    style="border:0;" 
+    allowfullscreen 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+
+            
+            <!-- Additional Location Info -->
+            <div class="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Jam Operasional</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-amber-500 mr-3"></i>
+                            Senin-Jumat: 08.00 - 20.00 WIB
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-amber-500 mr-3"></i>
+                            Sabtu-Minggu: 09.00 - 21.00 WIB
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Kontak</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-amber-500 mr-3"></i>
+                            (021) 1234-5678
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp text-amber-500 mr-3"></i>
+                            0812-3456-7890
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-amber-500 mr-3"></i>
+                            info@dapurmalika.com
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- FAQ Section -->
     <section class="py-16 bg-white">

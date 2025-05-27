@@ -28,15 +28,14 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AdminController::class, 'logout'])->name('admin.logout')->middleware('admin.auth');
     
     // Password Reset Routes
-
     Route::get('/forgot-password', [AdminPasswordResetController::class, 'showRequestForm'])
-        ->name('admin.password.request');
+        ->name('password.request');
     Route::post('/forgot-password', [AdminPasswordResetController::class, 'sendResetLink'])
-        ->name('admin.password.email');
+        ->name('password.email');
     Route::get('/reset-password/{token}', [AdminPasswordResetController::class, 'showResetForm'])
-        ->name('admin.password.reset');
+        ->name('password.reset');
     Route::post('/reset-password', [AdminPasswordResetController::class, 'reset'])
-        ->name('admin.password.update');
+        ->name('password.update');
 });
 
 // Authenticated Admin Routes
