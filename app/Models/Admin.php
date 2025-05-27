@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Notifications\AdminResetPasswordNotification;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements CanResetPasswordContract
 {
-    use Notifiable;
+    use Notifiable, CanResetPassword;
 
     protected $guard = 'admin';
 
@@ -24,14 +26,18 @@ class Admin extends Authenticatable
     ];
     
     protected $hidden = [
-        'password', 
-        'remember_token',
+        'password'
     ];
 
     protected $casts = [
         'birth_date' => 'date',
-        'email_verified_at' => 'datetime',
     ];
+
+    // Nonaktifkan remember_token jika tidak ada kolomnya
+    public function getRememberTokenName()
+    {
+        return null; // Disable remember token functionality
+    }
 
     // Accessor for profile picture URL
     public function getProfilePictureUrlAttribute()
@@ -41,11 +47,27 @@ class Admin extends Authenticatable
             : asset('images/default-profile.png');
     }
 
-    // Mutator for password hashing
-    protected function password(): Attribute
+    // PENTING: Hapus mutator password yang otomatis hash
+    // Biarkan controller yang handle hashing manual
+    
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
     {
-        return Attribute::make(
-            set: fn ($value) => Hash::make($value),
-        );
+        $this->notify(new AdminResetPasswordNotification($token));
+    }
+
+    /**
+     * Get the e-mail address where password reset links are sent.
+     *
+     * @return string
+     */
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
     }
 }

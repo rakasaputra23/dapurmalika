@@ -14,9 +14,9 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
-    ],
+    'guard' => 'admin', // Ubah dari 'web' ke 'admin'
+    'passwords' => 'admins', // Ubah dari 'users' ke 'admins'
+],
 
     /*
     |--------------------------------------------------------------------------
@@ -35,13 +35,12 @@ return [
     |
     */
 
-    'guards' => [
-    'admin' => [
-    'driver' => 'session',
-    'provider' => 'admins',
-],
-
-],
+'guards' => [
+        'admin' => [ // Hanya guard admin
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -61,11 +60,10 @@ return [
     */
 
     'providers' => [
-    'admins' => [
-    'driver' => 'eloquent',
-    'model' => App\Models\Admin::class,
-],
-
+    'admins' => [ // Hapus 'users' jika tidak dipakai
+        'driver' => 'eloquent',
+        'model' => App\Models\Admin::class, // Pastikan model Admin ada
+    ],
 ],
 
 
@@ -85,20 +83,14 @@ return [
     */
 
     'passwords' => [
-    'users' => [
-        'provider' => 'users',
-        'table' => 'password_resets',
-        'expire' => 60,
-        'throttle' => 60,
-    ],
-
-    'admins' => [ // 🔥 Tambahkan ini jika ingin fitur reset password admin
+    'admins' => [
         'provider' => 'admins',
         'table' => 'password_resets',
         'expire' => 60,
         'throttle' => 60,
     ],
 ],
+
 
 
     /*
