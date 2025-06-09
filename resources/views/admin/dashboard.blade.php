@@ -104,9 +104,12 @@
                                         <td>{{ $menu->nama }}</td>
                                         <td>Rp {{ number_format($menu->price, 0, ',', '.') }}</td>
                                         <td>
-                                            <span class="badge badge-info">
-                                                {{ $menu->kategori->nama ?? '-' }}
-                                            </span>
+                                            <span class="badge badge-primary text-dark">
+    {{ $menu->kategori->nama ?? '-' }}
+</span>
+
+
+
                                         </td>
                                     </tr>
                                     @endforeach
