@@ -4,13 +4,13 @@
         <div class="grid md:grid-cols-3 gap-8 text-center">
             <div>
                 <h3 class="text-xl font-semibold mb-4">Kontak Kami</h3>
-                <p>+62 812 3456 7890</p>
-                <p>support@dapurmalika.com</p>
+                <p>+62 813-3628-0522</p>
+                <p>rikaayuff@gmail.com</p>
             </div>
             <div>
                 <h3 class="text-xl font-semibold mb-4">Lokasi</h3>
-                <p>Jl. Contoh No. 123</p>
-                <p>Kota Kuliner, Indonesia</p>
+                <p>Perum. Gebang Raya Blok AL-21</p>
+                <p>Kota Sidoarjo, Indonesia</p>
             </div>
             <div>
                 <h3 class="text-xl font-semibold mb-4">Sosial Media</h3>

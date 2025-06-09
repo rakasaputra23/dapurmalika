@@ -9,7 +9,7 @@
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
+        </ol>       
     </div>
 
     <!-- Stats Cards Row -->

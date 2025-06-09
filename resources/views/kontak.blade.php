@@ -138,7 +138,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Alamat</h3>
-                                <p class="text-gray-600 mt-1">Perum. Gebang Raya Blok AL-17, Kota Sidoarjo, Indonesia</p>
+                                <p class="text-gray-600 mt-1">Perum. Gebang Raya Blok AL-21, Kota Sidoarjo, Indonesia</p>
                             </div>
                         </div>
                         
@@ -148,7 +148,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Telepon</h3>
-                                <p class="text-gray-600 mt-1">+62 813 8298 6746</p>
+                                <p class="text-gray-600 mt-1">+62 813-3628-0522</p>
                             </div>
                         </div>
                         
@@ -158,7 +158,7 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Email</h3>
-                                <p class="text-gray-600 mt-1">kurniawatiyuni631@gmail.com</p>
+                                <p class="text-gray-600 mt-1">rikaayuff@gmail.com</p>
                             </div>
                         </div>
                         
@@ -168,8 +168,8 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-lg">Jam Operasional</h3>
-                                <p class="text-gray-600 mt-1">Senin - Sabtu: 08.00 - 17.00 WIB</p>
-                                <p class="text-gray-600">Minggu: 09.00 - 15.00 WIB</p>
+                                <p class="text-gray-600 mt-1">Senin-Jumat: 08.00 - 20.00 WIB</p>
+                                <p class="text-gray-600">Sabtu-Minggu: 09.00 - 21.00 WIB</p>
                             </div>
                         </div>
                     </div>
@@ -236,7 +236,7 @@
         <div class="text-center mb-10">
             <h2 class="text-3xl font-bold text-gray-800">Lokasi Kami</h2>
             <div class="w-20 h-1 bg-amber-500 mx-auto my-4"></div>
-            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Kunjungi kami di Perum. Gebang Raya Blok AL-17, Gebang, Sidoarjo</p>
+            <p class="text-gray-600 mt-2 max-w-2xl mx-auto">Kunjungi kami di Perum. Gebang Raya Blok AL-21, Gebang, Sidoarjo</p>
         </div>
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             <!-- Google Maps Embed -->
@@ -278,11 +278,11 @@
                         </li>
                         <li class="flex items-center">
                             <i class="fab fa-whatsapp text-amber-500 mr-3"></i>
-                            0813-8298-6746
+                            +62 813-3628-0522
                         </li>
                         <li class="flex items-center">
                             <i class="fas fa-envelope text-amber-500 mr-3"></i>
-                            kurniawatiyuni631@gmail.com
+                            rikaayuff@gmail.com
                         </li>
                     </ul>
                 </div>

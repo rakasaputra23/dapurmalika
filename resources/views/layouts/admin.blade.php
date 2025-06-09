@@ -140,6 +140,19 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
+
+        /* Default avatar styling */
+        .default-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 1.2rem;
+        }
         
         @media (max-width: 992px) {
             .sidebar {
@@ -218,7 +231,15 @@
                     <div class="ms-auto d-flex align-items-center">
                         <div class="dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://via.placeholder.com/40" alt="Admin" class="avatar">
+                                @if(Auth::guard('admin')->user()->profile_picture)
+                                    <img src="{{ asset('storage/' . Auth::guard('admin')->user()->profile_picture) }}" 
+                                         alt="Admin" 
+                                         class="avatar">
+                                @else
+                                    <div class="default-avatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                @endif
                                 <span class="ms-2 d-none d-lg-inline-block">{{ Auth::guard('admin')->user()->name ?? 'Admin' }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
