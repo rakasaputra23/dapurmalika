@@ -231,6 +231,18 @@
         flex: 0 0 33.33%;
     }
 }
+
+.default-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    font-size: 1.2rem;
+}
     </style>
 </head>
 
